@@ -265,7 +265,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(this);
 
-
         buttonClear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getContext(),"Clear",Toast.LENGTH_SHORT).show();
@@ -289,6 +288,16 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
         });
 
+        buttonSave.setVisibility(View.INVISIBLE);
+
+        if (sum_run_time == 10){
+            buttonSave.setVisibility(View.VISIBLE);
+        }
+
+
+
+
+
         buttonCsvShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -311,7 +320,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
             }
         });
-
 
         PopUpSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -525,10 +533,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                         long finish = System.currentTimeMillis();
                         sum_run_time = finish - start;
                     }
-                    walk_counter_txt.setText(c);
+                    walk_counter_txt.setText(String.valueOf(walk_counter));
                     run_counter_txt.setText(String.valueOf(run_counter));
                     jump_counter_txt.setText(String.valueOf(jump_counter));
-
 
 
                     data.addEntry(new Entry(Integer.valueOf(parts[3]),N),0);
@@ -559,6 +566,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             receiveText.append(TextUtil.toCaretString(msg, newline.length() != 0));
         }
     }
+
+
+
+
 
     private void status(String str) {
         SpannableStringBuilder spn = new SpannableStringBuilder(str + '\n');

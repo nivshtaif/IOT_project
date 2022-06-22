@@ -60,7 +60,8 @@
             android:layout_height="wrap_content"
             android:text="Start"
             android:layout_marginRight="7dp"
-            android:layout_marginLeft="7dp"/>
+            android:layout_marginLeft="7dp" />
+
 
         <Button
             android:id="@+id/SaveBtn"
