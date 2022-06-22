@@ -100,7 +100,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     int run_counter = 0;
     int jump_counter = 0;
 
-    long sum_jump_time = 0;
+    float sum_jump_time = 0;
     long sum_walk_time = 0;
     long sum_run_time = 0;
 
@@ -510,6 +510,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             receiveText.append(TextUtil.toHexString(message) + '\n');
         } else {
             String msg = new String(message);
+            long start = System.currentTimeMillis();
             if(newline.equals(TextUtil.newline_crlf) && msg.length() > 0) {
                 // don't show CR as ^M if directly before LF
                 String msg_to_save = msg;
@@ -523,7 +524,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
                     // saving data to csv
                 try {
-                    long start = System.currentTimeMillis();
+//                    long start = System.currentTimeMillis();
 
                     // create new csv unless file already exists
                     File file = new File("/storage/self/primary/Terminal/");
@@ -548,20 +549,23 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
 
 
-                    if (N > jump_threshold && N < walk_threshold) {
+                    if (N > jump_threshold && N < rest_threshold) {
                         jump_counter = jump_counter + 1;
                         long finish = System.currentTimeMillis();
-                        sum_jump_time += (finish - start)/1000 + 0.5;
+                        sum_jump_time += (float) (finish - start)/1000;
+                        sum_jump_time += 0.5;
                     }
                     else if (N > walk_threshold && N < run_threshold) {
                         walk_counter = walk_counter + 1;
                         long finish = System.currentTimeMillis();
-                        sum_walk_time += (finish - start)/1000 + 0.5;
+                        sum_walk_time += (float) (finish - start)/1000;
+                        sum_walk_time += 0.5;
                     }
                     else if (N > run_threshold) {
                         run_counter = run_counter + 1;
                         long finish = System.currentTimeMillis();
-                        sum_run_time += (finish - start)/1000 + 0.5;
+                        sum_run_time += (float) (finish - start)/1000;
+                        sum_run_time += 0.5;
                     }
 
                     walk_time_counter_txt.setText(String.valueOf(sum_walk_time));
