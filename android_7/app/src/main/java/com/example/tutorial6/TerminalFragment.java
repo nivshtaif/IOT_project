@@ -285,6 +285,12 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 startIndex = GetIndex();
                 stopIndex = startIndex + 1;
                 walk_counter = 0;
+                run_counter = 0;
+                jump_counter = 0;
+                sum_walk_time = 0;
+                sum_run_time = 0;
+                sum_jump_time = 0;
+
 //                Date date = new Date();
 //                timeStamp = new SimpleDateFormat("ddMMyyyy HH:mm").format(Calendar.getInstance().getTime());
                 LineData data = mpLineChart.getData();
@@ -304,7 +310,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         buttonSave.setVisibility(View.INVISIBLE);
 
-        if (sum_walk_time == 10){
+        if (sum_jump_time == 10){
             buttonSave.setVisibility(View.VISIBLE);
         }
 
@@ -330,6 +336,13 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //                startIndex = (int) data.getXMax();
                 startIndex = GetIndex();
                 walk_counter = 0;
+                run_counter = 0;
+                jump_counter = 0;
+
+                sum_walk_time = 0;
+                sum_run_time = 0;
+                sum_jump_time = 0;
+
                 timeStamp = new SimpleDateFormat("dd-MM-yyyy_HHmm").format(Calendar.getInstance().getTime());
 
             }
@@ -344,9 +357,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 String spinner_mode = spinner.getSelectedItem().toString();
 //                String mode = spinner.getTransitionName();
                 OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
-                walk_counter = 0;
-                run_counter = 0;
-                jump_counter = 0;
+//                walk_counter = 0;
+//                run_counter = 0;
+//                jump_counter = 0;
                 dialog.dismiss();
 
             }
@@ -533,21 +546,23 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
 
                     long start = System.currentTimeMillis();
+
                     if (N > jump_threshold && N < walk_threshold) {
-                        jump_counter += 1;
+                        jump_counter = jump_counter + 1;
                         long finish = System.currentTimeMillis();
                         sum_jump_time = finish - start;
                     }
-                    if (N > walk_threshold && N < run_threshold) {
-                        walk_counter += 1;
+                    else if (N > walk_threshold && N < run_threshold) {
+                        walk_counter = walk_counter + 1;
                         long finish = System.currentTimeMillis();
                         sum_walk_time = finish - start;
                     }
-                    if (N > run_threshold) {
-                        run_counter += 1;
+                    else if (N > run_threshold) {
+                        run_counter = run_counter + 1;
                         long finish = System.currentTimeMillis();
                         sum_run_time = finish - start;
                     }
+
                     walk_time_counter_txt.setText(String.valueOf(sum_walk_time));
                     run_time_counter_txt.setText(String.valueOf(sum_run_time));
                     jump_time_counter_txt.setText(String.valueOf(sum_jump_time));
@@ -586,8 +601,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             receiveText.append(TextUtil.toCaretString(msg, newline.length() != 0));
         }
     }
-
-
 
 
 
