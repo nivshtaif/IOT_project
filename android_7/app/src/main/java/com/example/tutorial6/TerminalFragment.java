@@ -359,14 +359,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         PopUpSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String file_name = CSV_Name.getText().toString();
-                String pace_counter = Pace_counter.getText().toString();
+//                String file_name = CSV_Name.getText().toString();
+//                String pace_counter = Pace_counter.getText().toString();
                 String spinner_mode = spinner.getSelectedItem().toString();
-//                String mode = spinner.getTransitionName();
-                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
-//                walk_counter = 0;
-//                run_counter = 0;
-//                jump_counter = 0;
+////                String mode = spinner.getTransitionName();
+//                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
+////                walk_counter = 0;
+////                run_counter = 0;
+////                jump_counter = 0;
+
                 dialog.dismiss();
 
             }
@@ -548,6 +549,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //                    data.addEntry(new Entry(Integer.valueOf(parts[3]),Float.parseFloat(parts[0])),0);
 //                    data.addEntry(new Entry(Integer.valueOf(parts[3]),Float.parseFloat(parts[1])),1);
 //                    data.addEntry(new Entry(Integer.valueOf(parts[3]),Float.parseFloat(parts[2])),2);
+
+                    if
 
                     float acc_x = (float) Math.pow(Float.parseFloat(parts[0]), 2);
                     float acc_y = (float) Math.pow(Float.parseFloat(parts[1]), 2);
