@@ -293,6 +293,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         AlertDialog.Builder builder2 = new AlertDialog.Builder(view.getContext()); // Should be this
         builder2.setTitle("Welcome");
 
+        AlertDialog.Builder builder3 = new AlertDialog.Builder(view.getContext()); // Should be this
+        builder3.setTitle("Training Report");
+
         View view2 = inflater.inflate(R.layout.layout_dialog, null);
         View view3 = inflater.inflate(R.layout.welcome, null);
         View view4 = inflater.inflate(R.layout.training_report, null);
@@ -324,6 +327,12 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         dialog2 = builder2.create();
         if (flag==0){
             dialog2.show();
+        }
+
+        builder3.setView(view3);
+        dialog3 = builder3.create();
+        if (flag==0){
+            dialog3.show();
         }
 
         buttonClear.setOnClickListener(new View.OnClickListener() {
