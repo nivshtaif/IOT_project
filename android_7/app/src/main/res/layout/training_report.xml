@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="R" />
+                        android:text="Walking" />
 
                 </LinearLayout>
 
@@ -101,7 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="Python" />
+                        android:text="Running" />
 
                 </LinearLayout>
 
@@ -243,9 +243,9 @@
         android:layout_height="190dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp">
 
