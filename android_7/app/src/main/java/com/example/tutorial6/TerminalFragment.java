@@ -119,6 +119,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
     //
     AlertDialog dialog;
+    AlertDialog dialog2;
+    AlertDialog dialog3;
+
+
 
     int session;
     /*
@@ -403,8 +407,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
         });
 //CHECKKKKKKK
-//        builder.setView(view2);
-//        dialog = builder.create();
+        builder.setView(view2);
+        dialog = builder.create();
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -445,7 +449,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     session = 2;
                     flag = 1;
                 }
-                dialog.dismiss();
+                dialog2.dismiss();
 
             }
         });
