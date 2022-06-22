@@ -103,6 +103,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     long sum_walk_time = 0;
     long sum_run_time = 0;
 
+    TextView walk_time_counter_txt;
+    TextView run_time_counter_txt;
+    TextView jump_time_counter_txt;
+
     TextView walk_counter_txt;
     TextView run_counter_txt;
     TextView jump_counter_txt;
@@ -265,6 +269,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(this);
 
+
         buttonClear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getContext(),"Clear",Toast.LENGTH_SHORT).show();
@@ -320,6 +325,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
             }
         });
+
 
         PopUpSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -536,6 +542,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     walk_counter_txt.setText(String.valueOf(walk_counter));
                     run_counter_txt.setText(String.valueOf(run_counter));
                     jump_counter_txt.setText(String.valueOf(jump_counter));
+
 
 
                     data.addEntry(new Entry(Integer.valueOf(parts[3]),N),0);
