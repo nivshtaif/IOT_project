@@ -90,11 +90,20 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     LineData data;
     int startIndex = 0;
     int stopIndex = 1;
-    float threshold = (float) 9.8;
-    int steps_counter = 0;
-    TextView counter_txt;
-//    float thresh_run = (float) 9.8;
 
+    float walk_threshold = (float) 10.5;
+    float run_threshold = (float) 13;
+    float jump_threshold = (float) 9.8;
+
+    int walk_counter = 0;
+    int run_counter = 0;
+    int jump_counter = 0;
+
+    TextView walk_counter_txt;
+    TextView run_counter_txt;
+    TextView jump_counter_txt;
+
+    //
     AlertDialog dialog;
 
     /*
@@ -486,10 +495,23 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_y = (float) Math.pow(Float.parseFloat(parts[1]), 2);
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
-                    if (N > threshold) {
-                        steps_counter += 1;
+
+
+                    if (N > jump_threshold && N < walk_threshold) {
+                        jump_counter += 1;
                     }
-                    counter_txt.setText(String.valueOf(steps_counter));
+                    if (N > walk_threshold && N < run_threshold) {
+                        walk_counter += 1;
+                    }
+                    if (N > run_threshold) {
+                        run_counter += 1;
+                    }
+                    walk_counter_txt.setText(String.valueOf(walk_counter));
+                    run_counter_txt.setText(String.valueOf(run_counter));
+                    jump_counter_txt.setText(String.valueOf(jump_counter));
+
+
+
                     data.addEntry(new Entry(Integer.valueOf(parts[3]),N),0);
 
 //                    lineDataSet0.notifyDataSetChanged(); // let the data know a dataSet changed
