@@ -91,9 +91,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     int startIndex = 0;
     int stopIndex = 1;
 
-    float walk_threshold = (float) 10.5;
-    float run_threshold = (float) 13;
-    float jump_threshold = (float) 9.8;
+    float rest_threshold = (float) 9;
+    float walk_threshold = (float) 11;
+    float run_threshold = (float) 17;
+    float jump_threshold = (float) 6;
 
     int walk_counter = 0;
     int run_counter = 0;
@@ -522,6 +523,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
                     // saving data to csv
                 try {
+                    long start = System.currentTimeMillis();
 
                     // create new csv unless file already exists
                     File file = new File("/storage/self/primary/Terminal/");
@@ -545,12 +547,13 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
 
-                    long start = System.currentTimeMillis();
 
                     if (N > jump_threshold && N < walk_threshold) {
                         jump_counter = jump_counter + 1;
                         long finish = System.currentTimeMillis();
                         sum_jump_time += (finish - start)/1000;
+                        sum_jump_time += 5;
+
                     }
                     else if (N > walk_threshold && N < run_threshold) {
                         walk_counter = walk_counter + 1;
