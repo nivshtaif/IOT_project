@@ -299,7 +299,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         View view2 = inflater.inflate(R.layout.layout_dialog, null);
         View view3 = inflater.inflate(R.layout.welcome, null);
-//        View view4 = inflater.inflate(R.layout.training_report, null);
+        View view4 = inflater.inflate(R.layout.training_report, null);
 
         // Link those objects with their respective
         // id's that we have given in .XML file
