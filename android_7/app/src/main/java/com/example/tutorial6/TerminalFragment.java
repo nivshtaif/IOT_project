@@ -125,6 +125,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     float training_time;
     TextView dis_walk;
     TextView dis_run;
+    TextView step_walk;
+    TextView step_run;
+    TextView step_jump;
     PieChart pieChart;
     float walk_dis;
     float run_dis;
@@ -303,8 +306,13 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         // Link those objects with their respective
         // id's that we have given in .XML file
-//        dis_walk = view4.findViewById(R.id.dis_walk);
-//        dis_run = view4.findViewById(R.id.dis_run);
+        pieChart = view4.findViewById(R.id.piechart);
+        dis_walk = view4.findViewById(R.id.dis_walk);
+        dis_run = view4.findViewById(R.id.dis_run);
+        step_walk = view4.findViewById(R.id.step_walk);
+        step_run = view4.findViewById(R.id.step_run);
+        step_jump = view4.findViewById(R.id.step_jump);
+        Button PopUpExit = view4.findViewById(R.id.exit_report);
 
         EditText CSV_Name = view2.findViewById(R.id.CSV_Name);
         EditText Pace_counter = view2.findViewById(R.id.Pace_counter);
@@ -423,9 +431,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //                }
                 dialog.dismiss();
 //
-//                builder3.setView(view4);
-//                dialog3 = builder3.create();
-//                dialog3.show();
+                builder3.setView(view4);
+                dialog3 = builder3.create();
+                dialog3.show();
 
 
 
@@ -705,19 +713,23 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     run_counter_txt.setText(String.valueOf(run_counter));
                     jump_counter_txt.setText(String.valueOf(jump_counter));
 
-//                    training_time = sum_run_time + sum_walk_time;
+                    training_time = sum_run_time + sum_walk_time;
                     // Set the percentage of language used
-//                    int walk_part = (int) (100*(sum_walk_time/training_time));
-//                    int run_part = (int) (100*(sum_run_time/training_time));
+                    int walk_part = (int) (100*(sum_walk_time/training_time));
+                    int run_part = (int) (100*(sum_run_time/training_time));
 //                    dis_walk.setText(Integer.toString(walk_part));
 //                    dis_run.setText(Integer.toString(run_part));
                     // Set the data and color to the pie chart
-//                    showPieChart(walk_part, run_part);
+                    showPieChart(walk_part, run_part);
 
-//                    walk_dis = (float) (walk_counter * (0.74));
-//                    run_dis = (float) (walk_counter * (1.1));
-//                    dis_walk.setText(String.valueOf(walk_dis));
-//                    dis_run.setText(String.valueOf(run_dis));
+                    walk_dis = (float) (walk_counter * (0.74));
+                    run_dis = (float) (walk_counter * (1.1));
+                    dis_walk.setText(String.valueOf(walk_dis));
+                    dis_run.setText(String.valueOf(run_dis));
+                    walk_counter = 10;
+                    step_walk.setText(String.valueOf(walk_counter));
+                    step_run.setText(String.valueOf(run_counter));
+                    step_jump.setText(String.valueOf(jump_counter));
 
 
                     data.addEntry(new Entry(Integer.valueOf(parts[3]),N),0);
@@ -749,41 +761,41 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         }
     }
 
-//    private void showPieChart(int walk_part, int run_part)
-//    {
-//
-//        ArrayList<PieEntry> pieEntries = new ArrayList<>();
-//        String label = "type";
-//
-//        //initializing data
-//        Map<String, Integer> typeAmountMap = new HashMap<>();
-//        typeAmountMap.put("Walking",walk_part);
-//        typeAmountMap.put("Running",run_part);
-//
-//        //initializing colors for the entries
-//        ArrayList<Integer> colors = new ArrayList<>();
-//        colors.add(Color.parseColor("#FF2D00"));
-//        colors.add(Color.parseColor("#25AC04"));
-//
-//        //input data and fit data into pie chart entry
-//        for(String type: typeAmountMap.keySet()){
-//            pieEntries.add(new PieEntry(typeAmountMap.get(type).floatValue(), type));
-//        }
-//
-//        //collecting the entries with label name
-//        PieDataSet pieDataSet = new PieDataSet(pieEntries,label);
-//        //setting text size of the value
-//        pieDataSet.setValueTextSize(12f);
-//        //providing color list for coloring different entries
-//        pieDataSet.setColors(colors);
-//        //grouping the data set from entry to chart
-//        PieData pieData = new PieData(pieDataSet);
-//        //showing the value of the entries, default true if not set
-//        pieData.setDrawValues(true);
-//
-//        pieChart.setData(pieData);
-//        pieChart.invalidate();
-//    }
+    private void showPieChart(int walk_part, int run_part)
+    {
+
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+        String label = "type";
+
+        //initializing data
+        Map<String, Integer> typeAmountMap = new HashMap<>();
+        typeAmountMap.put("Walking",4); //walk_part
+        typeAmountMap.put("Running",6); //run_part
+
+        //initializing colors for the entries
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.parseColor("#FF2D00"));
+        colors.add(Color.parseColor("#25AC04"));
+
+        //input data and fit data into pie chart entry
+        for(String type: typeAmountMap.keySet()){
+            pieEntries.add(new PieEntry(typeAmountMap.get(type).floatValue(), type));
+        }
+
+        //collecting the entries with label name
+        PieDataSet pieDataSet = new PieDataSet(pieEntries,label);
+        //setting text size of the value
+        pieDataSet.setValueTextSize(12f);
+        //providing color list for coloring different entries
+        pieDataSet.setColors(colors);
+        //grouping the data set from entry to chart
+        PieData pieData = new PieData(pieDataSet);
+        //showing the value of the entries, default true if not set
+        pieData.setDrawValues(true);
+
+        pieChart.setData(pieData);
+        pieChart.invalidate();
+    }
 
     private void status(String str) {
         SpannableStringBuilder spn = new SpannableStringBuilder(str + '\n');

@@ -9,16 +9,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="40dp"
-        android:text="Training Report"
-        android:textColor="@color/dark_blue"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
     <!-- Card view for displaying the -->
     <!-- Pie chart and details of pie chart -->
     <androidx.cardview.widget.CardView
@@ -27,8 +17,9 @@
         android:layout_height="200dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:elevation="10dp"
+        android:background="@color/white"
         app:cardCornerRadius="10dp">
 
 
@@ -41,18 +32,19 @@
             android:weightSum="2">
 
             <!--Pie chart to display the data-->
-
-<!--            <org.eazegraph.lib.charts.PieChart-->
-<!--                android:id="@+id/piechart"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_marginLeft="15dp"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:layout_marginBottom="15dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:padding="6dp"-->
-<!--                tools:ignore="MissingClass"-->
-<!--                />-->
+            <!--                org.eazegraph.lib.charts.PieChart-->
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/piechart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:padding="6dp"
+                tools:ignore="MissingClass"
+                android:background="@color/white"
+                />
 
             <!--Creating another linear layout -->
             <!-- to display pie chart details -->
@@ -62,7 +54,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -116,13 +109,14 @@
     <!-- Another Card view for displaying -->
     <!-- Use of programming languages -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDistance"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_below="@+id/cardViewGraph"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="20dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp">
 
@@ -131,6 +125,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <!--Text view to use of -->
@@ -168,6 +163,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Walking distance"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp" />
 
                 <!--Text view to display the -->
@@ -207,6 +203,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Running distance"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp" />
 
                 <!--Text view to display the percentage -->
@@ -240,13 +237,15 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="381dp"
-        android:layout_height="190dp"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/cardViewStep"
+        android:layout_width="wrap_content"
+        android:layout_height="208dp"
+        android:layout_above="@+id/exit_report"
+        android:layout_below="@+id/cardViewDistance"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="0dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="5dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp">
 
@@ -254,7 +253,8 @@
         <!-- use of programming languages -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="196dp"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <!--Text view to use of -->
@@ -292,6 +292,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Walking"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp" />
 
                 <!--Text view to display the -->
@@ -331,6 +332,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Running"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp" />
 
                 <!--Text view to display the percentage -->
@@ -371,6 +373,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Jumping"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp" />
 
                 <!--Text view to display the percentage -->
@@ -402,6 +405,22 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-<!--    android:id="@+id/details"-->
+
+    <Button
+        android:id="@+id/exit_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="60dp"
+        android:elevation="10dp"
+        android:text="Exit" />
+    <!--    android:id="@+id/details"-->
 
 </RelativeLayout>
