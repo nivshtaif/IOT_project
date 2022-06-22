@@ -469,6 +469,31 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
         });
 
+//        WelcomeSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                String file_name = CSV_Name.getText().toString();
+////                String pace_counter = Pace_counter.getText().toString();
+//                String spinner_mode = spinner.getSelectedItem().toString();
+////                String mode = spinner.getTransitionName();
+////                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
+////                walk_counter = 0;
+////                run_counter = 0;
+////                jump_counter = 0;
+//
+//                if (spinner_mode.equals("Walk")){
+//                    session = 1;
+//                    flag = 1;
+//                }
+//                else {
+//                    session = 2;
+//                    flag = 1;
+//                }
+//                dialog.dismiss();
+//
+//            }
+//        });
+
     //        buttonStop.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
