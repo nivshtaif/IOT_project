@@ -329,11 +329,11 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             dialog2.show();
         }
 
-        builder3.setView(view4);
-        dialog3 = builder3.create();
-        if (flag==0){
-            dialog3.show();
-        }
+//        builder3.setView(view4);
+//        dialog3 = builder3.create();
+//        if (flag==0){
+//            dialog3.show();
+//        }
 
         buttonClear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
