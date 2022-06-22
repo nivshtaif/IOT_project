@@ -551,19 +551,17 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     if (N > jump_threshold && N < walk_threshold) {
                         jump_counter = jump_counter + 1;
                         long finish = System.currentTimeMillis();
-                        sum_jump_time += (finish - start)/1000;
-                        sum_jump_time += 5;
-
+                        sum_jump_time += (finish - start)/1000 + 0.5;
                     }
                     else if (N > walk_threshold && N < run_threshold) {
                         walk_counter = walk_counter + 1;
                         long finish = System.currentTimeMillis();
-                        sum_walk_time += (finish - start)/1000;
+                        sum_walk_time += (finish - start)/1000 + 0.5;
                     }
                     else if (N > run_threshold) {
                         run_counter = run_counter + 1;
                         long finish = System.currentTimeMillis();
-                        sum_run_time += (finish - start)/1000;
+                        sum_run_time += (finish - start)/1000 + 0.5;
                     }
 
                     walk_time_counter_txt.setText(String.valueOf(sum_walk_time));
