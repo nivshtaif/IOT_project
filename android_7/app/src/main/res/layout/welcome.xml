@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:text="Save" />
+            android:text="Start" />
 
         <Button
             android:id="@+id/welBack"
