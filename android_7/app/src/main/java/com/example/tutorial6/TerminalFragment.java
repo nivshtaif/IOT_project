@@ -295,8 +295,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         AlertDialog.Builder builder3 = new AlertDialog.Builder(view.getContext()); // Should be this
         builder3.setTitle("Training Report");
 
-        AlertDialog.Builder builder3 = new AlertDialog.Builder(view.getContext()); // Should be this
-        builder2.setTitle("Report");
 
         View view2 = inflater.inflate(R.layout.layout_dialog, null);
         View view3 = inflater.inflate(R.layout.welcome, null);
@@ -461,7 +459,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
         });
 
-        WelcomeSave.setOnClickListener(new View.OnClickListener() {
+        WelcomeStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                String file_name = CSV_Name.getText().toString();
