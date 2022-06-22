@@ -247,19 +247,19 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         Button buttonSave = (Button) view.findViewById(R.id.SaveBtn);
 //        Button buttonReset = (Button) view.findViewById(R.id.ResetBtn);
 
-        walk_counter_txt = (TextView) view.findViewById(R.id.walk_counter);
+        walk_counter_txt = (TextView) view.findViewById(R.id.walk_count);
         walk_counter_txt.setText(String.valueOf(0));
 
         walk_time_counter_txt = (TextView) view.findViewById(R.id.walk_timer);
         walk_time_counter_txt.setText(String.valueOf(0));
 
-        run_counter_txt = (TextView) view.findViewById(R.id.run_counter);
+        run_counter_txt = (TextView) view.findViewById(R.id.run_count);
         run_counter_txt.setText(String.valueOf(0));
 
         run_time_counter_txt = (TextView) view.findViewById(R.id.run_timer);
         run_time_counter_txt.setText(String.valueOf(0));
 
-        jump_counter_txt = (TextView) view.findViewById(R.id.jump_counter);
+        jump_counter_txt = (TextView) view.findViewById(R.id.jump_count);
         jump_counter_txt.setText(String.valueOf(0));
 
         jump_time_counter_txt = (TextView) view.findViewById(R.id.jump_timer);
