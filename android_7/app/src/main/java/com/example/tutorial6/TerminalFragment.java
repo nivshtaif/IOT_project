@@ -99,6 +99,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     int run_counter = 0;
     int jump_counter = 0;
 
+    int sum_jump_time = 0;
+    int sum_walk_time = 0;
+    int sum_run_time = 0;
+
     TextView walk_counter_txt;
     TextView run_counter_txt;
     TextView jump_counter_txt;
@@ -238,8 +242,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //        Button buttonStop = (Button) view.findViewById(R.id.StopBtn);
         Button buttonSave = (Button) view.findViewById(R.id.SaveBtn);
 //        Button buttonReset = (Button) view.findViewById(R.id.ResetBtn);
-        counter_txt = (TextView) view.findViewById(R.id.step_counter);
-        counter_txt.setText(String.valueOf(0));
+        walk_counter_txt = (TextView) view.findViewById(R.id.step_counter);
+        walk_counter_txt.setText(String.valueOf(0));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext()); // Should be this
         builder.setTitle("Enter Your Data");
@@ -260,7 +264,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 Toast.makeText(getContext(),"Clear",Toast.LENGTH_SHORT).show();
                 startIndex = GetIndex();
                 stopIndex = startIndex + 1;
-                steps_counter = 0;
+                walk_counter = 0;
 //                Date date = new Date();
 //                timeStamp = new SimpleDateFormat("ddMMyyyy HH:mm").format(Calendar.getInstance().getTime());
                 LineData data = mpLineChart.getData();
@@ -295,7 +299,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //                startIndex = csvData.size();
 //                startIndex = (int) data.getXMax();
                 startIndex = GetIndex();
-                steps_counter = 0;
+                walk_counter = 0;
                 timeStamp = new SimpleDateFormat("dd-MM-yyyy_HHmm").format(Calendar.getInstance().getTime());
 
             }
@@ -310,7 +314,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 String spinner_mode = spinner.getSelectedItem().toString();
 //                String mode = spinner.getTransitionName();
                 OpenSaveCSV(file_name+".csv", pace_counter, spinner_mode, stopIndex);
-                steps_counter = 0;
+                walk_counter = 0;
                 dialog.dismiss();
 
             }
@@ -496,9 +500,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
 
-
+                    float temp_time = (float) Float.parseFloat(parts[3]);
                     if (N > jump_threshold && N < walk_threshold) {
                         jump_counter += 1;
+                        int sum_jump_time;
                     }
                     if (N > walk_threshold && N < run_threshold) {
                         walk_counter += 1;
@@ -627,8 +632,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             String[] row1 = new String[]{"NAME:", file_name};
             String[] row2 = new String[]{"EXPERIMENT TIME:", timeStamp};
             String[] row3 = new String[]{"ACTIVITY TYPE:", spinnerMode};
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + steps_counter);
-            String[] row4 = new String[]{"COUNT OF ACTUAL STEPS:", Paces, "ESTIMATED NUMBER OF STEPS:", String.valueOf(steps_counter)};
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + walk_counter);
+            String[] row4 = new String[]{"COUNT OF ACTUAL STEPS:", Paces, "ESTIMATED NUMBER OF STEPS:", String.valueOf(walk_counter)};
             String[] row5 = new String[]{};
             String[] row6 = new String[]{"Time [sec]", "ACC X", "ACC Y", "ACC Z"};
             CSVWriter csvWriter = new CSVWriter(new FileWriter(temp_csv,true));
