@@ -99,9 +99,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     int run_counter = 0;
     int jump_counter = 0;
 
-    int sum_jump_time = 0;
-    int sum_walk_time = 0;
-    int sum_run_time = 0;
+    long sum_jump_time = 0;
+    long sum_walk_time = 0;
+    long sum_run_time = 0;
 
     TextView walk_counter_txt;
     TextView run_counter_txt;
@@ -500,16 +500,21 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
 
-                    float temp_time = (float) Float.parseFloat(parts[3]);
+                    long start = System.currentTimeMillis();
                     if (N > jump_threshold && N < walk_threshold) {
                         jump_counter += 1;
-                        int sum_jump_time;
+                        long finish = System.currentTimeMillis();
+                        sum_jump_time = finish - start;
                     }
                     if (N > walk_threshold && N < run_threshold) {
                         walk_counter += 1;
+                        long finish = System.currentTimeMillis();
+                        sum_walk_time = finish - start;
                     }
                     if (N > run_threshold) {
                         run_counter += 1;
+                        long finish = System.currentTimeMillis();
+                        sum_run_time = finish - start;
                     }
                     walk_counter_txt.setText(String.valueOf(walk_counter));
                     run_counter_txt.setText(String.valueOf(run_counter));
@@ -632,8 +637,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             String[] row1 = new String[]{"NAME:", file_name};
             String[] row2 = new String[]{"EXPERIMENT TIME:", timeStamp};
             String[] row3 = new String[]{"ACTIVITY TYPE:", spinnerMode};
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + walk_counter);
-            String[] row4 = new String[]{"COUNT OF ACTUAL STEPS:", Paces, "ESTIMATED NUMBER OF STEPS:", String.valueOf(walk_counter)};
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + steps_counter);
+            String[] row4 = new String[]{"COUNT OF ACTUAL STEPS:", Paces, "ESTIMATED NUMBER OF STEPS:", String.valueOf(steps_counter)};
             String[] row5 = new String[]{};
             String[] row6 = new String[]{"Time [sec]", "ACC X", "ACC Y", "ACC Z"};
             CSVWriter csvWriter = new CSVWriter(new FileWriter(temp_csv,true));
