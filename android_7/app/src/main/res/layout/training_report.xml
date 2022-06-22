@@ -41,17 +41,17 @@
 
             <!--Pie chart to display the data-->
 
-            <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/piechart"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:padding="6dp"
+<!--            <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                android:id="@+id/piechart"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginBottom="15dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:padding="6dp"-->
 
-                tools:ignore="MissingClass" />
+<!--                tools:ignore="MissingClass" />-->
 
             <!--Creating another linear layout -->
             <!-- to display pie chart details -->
@@ -401,6 +401,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-    android:id="@+id/details"
+<!--    android:id="@+id/details"-->
 
 </RelativeLayout>
