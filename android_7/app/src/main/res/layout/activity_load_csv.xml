@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <Button
+            android:id="@+id/open_csv"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:text="Open"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"/>
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:text="back"
+            android:layout_marginRight="7dp"/>
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/csv_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
