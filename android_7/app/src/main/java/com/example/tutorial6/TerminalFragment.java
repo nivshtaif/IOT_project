@@ -88,6 +88,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     LineDataSet lineDataSetN;
     ArrayList<ILineDataSet> dataSets = new ArrayList<>();
     LineData data;
+
+    int flag = 0;
+
     int startIndex = 0;
     int stopIndex = 1;
 
@@ -117,6 +120,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     //
     AlertDialog dialog;
 
+    int session;
     /*
      * Lifecycle
      */
@@ -270,20 +274,38 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext()); // Should be this
         builder.setTitle("Enter Your Data");
 
-        View view2 = inflater.inflate(R.layout.layout_dialog, null);        builder.setView(view2);
-        dialog = builder.create();
-        dialog.show();
+
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(view.getContext()); // Should be this
+        builder2.setTitle("Welcome");
+
+        View view2 = inflater.inflate(R.layout.layout_dialog, null);
+        View view3 = inflater.inflate(R.layout.welcome, null);
+
+
 
         EditText CSV_Name = view2.findViewById(R.id.CSV_Name);
         EditText Pace_counter = view2.findViewById(R.id.Pace_counter);
         Button PopUpSave = view2.findViewById(R.id.PopUpSave);
         Button PopUpBack = view2.findViewById(R.id.PopUpBack);
         Spinner spinner = view2.findViewById(R.id.spinner);
+
+        Button WelcomeSave = view3.findViewById(R.id.PopUpSave);
+        Button WelcomeBack = view3.findViewById(R.id.PopUpBack);
+        Spinner Welcomespinner = view3.findViewById(R.id.spinner);
+
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.pace, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(this);
 
+        Welcomespinner.setAdapter(arrayAdapter);
+        Welcomespinner.setOnItemSelectedListener(this);
+
+        builder2.setView(view3);
+        dialog = builder2.create();
+        if (flag==0){
+            dialog.show();
+        }
 
         buttonClear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -361,19 +383,28 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             public void onClick(View v) {
 //                String file_name = CSV_Name.getText().toString();
 //                String pace_counter = Pace_counter.getText().toString();
-                String spinner_mode = spinner.getSelectedItem().toString();
-////                String mode = spinner.getTransitionName();
-//                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
-////                walk_counter = 0;
-////                run_counter = 0;
-////                jump_counter = 0;
+//                String spinner_mode = spinner.getSelectedItem().toString();
+//                String mode = spinner.getTransitionName();
+                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
+//                walk_counter = 0;
+//                run_counter = 0;
+//                jump_counter = 0;
 
+//                if (spinner_mode.equals("Walk")){
+//                    session = 1;
+//                    flag = 1;
+//                }
+//                else {
+//                    session = 2;
+//                    flag = 1;
+//                }
                 dialog.dismiss();
 
             }
         });
-        builder.setView(view2);
-        dialog = builder.create();
+//CHECKKKKKKK
+//        builder.setView(view2);
+//        dialog = builder.create();
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -391,6 +422,31 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+            }
+        });
+
+        WelcomeSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                String file_name = CSV_Name.getText().toString();
+//                String pace_counter = Pace_counter.getText().toString();
+                String spinner_mode = spinner.getSelectedItem().toString();
+//                String mode = spinner.getTransitionName();
+//                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
+//                walk_counter = 0;
+//                run_counter = 0;
+//                jump_counter = 0;
+
+                if (spinner_mode.equals("Walk")){
+                    session = 1;
+                    flag = 1;
+                }
+                else {
+                    session = 2;
+                    flag = 1;
+                }
+                dialog.dismiss();
+
             }
         });
 
@@ -550,12 +606,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //                    data.addEntry(new Entry(Integer.valueOf(parts[3]),Float.parseFloat(parts[1])),1);
 //                    data.addEntry(new Entry(Integer.valueOf(parts[3]),Float.parseFloat(parts[2])),2);
 
-                    if
+
 
                     float acc_x = (float) Math.pow(Float.parseFloat(parts[0]), 2);
                     float acc_y = (float) Math.pow(Float.parseFloat(parts[1]), 2);
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
+                    if (session == 1){
+                        jump_counter = 10000000;
+                    }
 
 //                    #JUMP = 25
 //                    #REST = 9.8

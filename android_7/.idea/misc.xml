@@ -7,7 +7,13 @@
         <entry key="..\:/Users/hay70/AndroidStudioProjects/IOT_project/android_7/app/src/main/res/layout/fragment_terminal.xml" value="0.25" />
         <entry key="..\:/Users/hay70/AndroidStudioProjects/IOT_project/android_7/app/src/main/res/layout/training_report.xml" value="0.264" />
         <entry key="..\:/Users/niv/AndroidStudioProjects/android_7/android_7/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/niv/AndroidStudioProjects/android_7/android_7/app/src/main/res/layout/fragment_terminal.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/niv/AndroidStudioProjects/android_7/android_7/app/src/main/res/layout/device_list_header.xml" value="0.25" />
+        <entry key="..\:/Users/niv/AndroidStudioProjects/android_7/android_7/app/src/main/res/layout/device_list_item.xml" value="0.25" />
+        <entry key="..\:/Users/niv/AndroidStudioProjects/android_7/android_7/app/src/main/res/layout/fragment_terminal.xml" value="0.264" />
+        <entry key="..\:/Users/niv/AndroidStudioProjects/android_7/android_7/app/src/main/res/layout/layout_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/niv/AndroidStudioProjects/android_7/android_7/app/src/main/res/layout/welcome.xml" value="0.1" />
+        <entry key="..\:/Users/niv/AppData/Local/Android/Sdk/platforms/android-29/data/res/layout/simple_spinner_dropdown_item.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/niv/AppData/Local/Android/Sdk/platforms/android-29/data/res/layout/simple_spinner_item.xml" value="0.10989583333333333" />
       </map>
     </option>
   </component>
