@@ -287,14 +287,16 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         jump_time_counter_txt.setText(String.valueOf(0));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext()); // Should be this
-        builder.setTitle("Enter Your Data");
-
+        builder.setTitle("Save");
 
         AlertDialog.Builder builder2 = new AlertDialog.Builder(view.getContext()); // Should be this
         builder2.setTitle("Welcome");
 
         AlertDialog.Builder builder3 = new AlertDialog.Builder(view.getContext()); // Should be this
         builder3.setTitle("Training Report");
+
+        AlertDialog.Builder builder3 = new AlertDialog.Builder(view.getContext()); // Should be this
+        builder2.setTitle("Report");
 
         View view2 = inflater.inflate(R.layout.layout_dialog, null);
         View view3 = inflater.inflate(R.layout.welcome, null);
@@ -427,6 +429,12 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //                    flag = 1;
 //                }
                 dialog.dismiss();
+
+                builder3.setView(view4);
+                dialog3 = builder3.create();
+                dialog3.show();
+
+
 
             }
         });
