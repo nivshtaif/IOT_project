@@ -308,8 +308,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         Button PopUpBack = view2.findViewById(R.id.PopUpBack);
         Spinner spinner = view2.findViewById(R.id.spinner);
 
-        Button WelcomeSave = view3.findViewById(R.id.PopUpSave);
-        Button WelcomeBack = view3.findViewById(R.id.PopUpBack);
+        Button WelcomeStart = view3.findViewById(R.id.welStart);
+        Button WelcomeBack = view3.findViewById(R.id.welBack);
         Spinner Welcomespinner = view3.findViewById(R.id.spinner);
 
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.pace, android.R.layout.simple_spinner_item);
@@ -321,9 +321,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         Welcomespinner.setOnItemSelectedListener(this);
 
         builder2.setView(view3);
-        dialog = builder2.create();
+        dialog2 = builder2.create();
         if (flag==0){
-            dialog.show();
+            dialog2.show();
         }
 
         buttonClear.setOnClickListener(new View.OnClickListener() {

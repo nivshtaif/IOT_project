@@ -23,7 +23,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/PopUpSave"
+            android:id="@+id/welStart"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
@@ -31,7 +31,7 @@
             android:text="Save" />
 
         <Button
-            android:id="@+id/PopUpBack"
+            android:id="@+id/welBack"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="7dp"
