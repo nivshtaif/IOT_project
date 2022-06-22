@@ -302,8 +302,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         // Link those objects with their respective
         // id's that we have given in .XML file
-        dis_walk = view4.findViewById(R.id.dis_walk);
-        dis_run = view4.findViewById(R.id.dis_run);
+//        dis_walk = view4.findViewById(R.id.dis_walk);
+//        dis_run = view4.findViewById(R.id.dis_run);
 
         EditText CSV_Name = view2.findViewById(R.id.CSV_Name);
         EditText Pace_counter = view2.findViewById(R.id.Pace_counter);
@@ -327,12 +327,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         dialog2 = builder2.create();
         if (flag==0){
             dialog2.show();
-        }
-
-        builder3.setView(view4);
-        dialog3 = builder3.create();
-        if (flag==0){
-            dialog3.show();
         }
 
         buttonClear.setOnClickListener(new View.OnClickListener() {
@@ -714,15 +708,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     // Set the percentage of language used
                     int walk_part = (int) (100*(sum_walk_time/training_time));
                     int run_part = (int) (100*(sum_run_time/training_time));
-                    dis_walk.setText(Integer.toString(walk_part));
-                    dis_run.setText(Integer.toString(run_part));
+//                    dis_walk.setText(Integer.toString(walk_part));
+//                    dis_run.setText(Integer.toString(run_part));
                     // Set the data and color to the pie chart
-                    showPieChart(walk_part, run_part);
+//                    showPieChart(walk_part, run_part);
 
                     walk_dis = (float) (walk_counter * (0.74));
                     run_dis = (float) (walk_counter * (1.1));
-                    dis_walk.setText(String.valueOf(walk_dis));
-                    dis_run.setText(String.valueOf(run_dis));
+//                    dis_walk.setText(String.valueOf(walk_dis));
+//                    dis_run.setText(String.valueOf(run_dis));
 
 
                     data.addEntry(new Entry(Integer.valueOf(parts[3]),N),0);
