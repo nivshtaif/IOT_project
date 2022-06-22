@@ -242,8 +242,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //        Button buttonStop = (Button) view.findViewById(R.id.StopBtn);
         Button buttonSave = (Button) view.findViewById(R.id.SaveBtn);
 //        Button buttonReset = (Button) view.findViewById(R.id.ResetBtn);
-        walk_counter_txt = (TextView) view.findViewById(R.id.step_counter);
+
+        walk_counter_txt = (TextView) view.findViewById(R.id.walk_counter);
         walk_counter_txt.setText(String.valueOf(0));
+
+        run_counter_txt = (TextView) view.findViewById(R.id.run_counter);
+        run_counter_txt.setText(String.valueOf(0));
+
+        jump_counter_txt = (TextView) view.findViewById(R.id.jump_counter);
+        jump_counter_txt.setText(String.valueOf(0));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext()); // Should be this
         builder.setTitle("Enter Your Data");
@@ -313,8 +320,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 String pace_counter = Pace_counter.getText().toString();
                 String spinner_mode = spinner.getSelectedItem().toString();
 //                String mode = spinner.getTransitionName();
-                OpenSaveCSV(file_name+".csv", pace_counter, spinner_mode, stopIndex);
+                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
                 walk_counter = 0;
+                run_counter = 0;
+                jump_counter = 0;
                 dialog.dismiss();
 
             }
@@ -516,7 +525,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                         long finish = System.currentTimeMillis();
                         sum_run_time = finish - start;
                     }
-                    walk_counter_txt.setText(String.valueOf(walk_counter));
+                    walk_counter_txt.setText(c);
                     run_counter_txt.setText(String.valueOf(run_counter));
                     jump_counter_txt.setText(String.valueOf(jump_counter));
 
@@ -625,49 +634,66 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     }
 
     // Save CSV
-    private void OpenSaveCSV(String file_name, String Paces, String spinnerMode, int endIndex){
+//    private void OpenSaveCSV(String file_name, String Paces, String spinnerMode, int endIndex){
+//
+//        try{
+//            ArrayList<Entry> dataVals = new ArrayList<Entry>();
+//            ArrayList<String[]> csvData = new ArrayList<>();
+//            csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
+//            File file = new File("/storage/self/primary/Terminal/DataSources");
+//            file.mkdirs();
+//            String temp_csv = String.format("/storage/self/primary/Terminal/DataSources/" + file_name);
+//            String[] row1 = new String[]{"NAME:", file_name};
+//            String[] row2 = new String[]{"EXPERIMENT TIME:", timeStamp};
+//            String[] row3 = new String[]{"ACTIVITY TYPE:", spinnerMode};
+//            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + steps_counter);
+//            String[] row4 = new String[]{"COUNT OF ACTUAL STEPS:", Paces, "ESTIMATED NUMBER OF STEPS:", String.valueOf(steps_counter)};
+//            String[] row5 = new String[]{};
+//            String[] row6 = new String[]{"Time [sec]", "ACC X", "ACC Y", "ACC Z"};
+//            CSVWriter csvWriter = new CSVWriter(new FileWriter(temp_csv,true));
+//            csvWriter.writeNext(row1);
+//            csvWriter.writeNext(row2);
+//            csvWriter.writeNext(row3);
+//            csvWriter.writeNext(row4);
+//            csvWriter.writeNext(row5);
+//            csvWriter.writeNext(row6);
+//
+//            int flag = 1;
+//            for (int i = startIndex; i <= stopIndex ; i++)
+//            {
+//                String x = csvData.get(i)[0];
+//                String y = csvData.get(i)[1];
+//                String z = csvData.get(i)[2];
+//                double t;
+//                if (flag == 1) { t = Double.parseDouble(csvData.get(i)[3])/1000;}
+//                else {t = Double.parseDouble(csvData.get(i)[3])/1000 - flag;}
+//                String[] row = new String[]{String.valueOf(t), x, y, z};
+////                CSVWriter csvWriter = new CSVWriter(new FileWriter(temp_csv,true));
+//                csvWriter.writeNext(row);
+//            }
+//            csvWriter.close();
+//
+//        } catch (IOException e) {
+//        e.printStackTrace();
+//        }
+//
+//    }
 
+    private void OpenSaveCSV(String path,String walk_txt, String run_txt, String jump_txt){
         try{
-            ArrayList<Entry> dataVals = new ArrayList<Entry>();
-            ArrayList<String[]> csvData = new ArrayList<>();
-            csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
-            File file = new File("/storage/self/primary/Terminal/DataSources");
+            File file = new File(path);
             file.mkdirs();
-            String temp_csv = String.format("/storage/self/primary/Terminal/DataSources/" + file_name);
-            String[] row1 = new String[]{"NAME:", file_name};
-            String[] row2 = new String[]{"EXPERIMENT TIME:", timeStamp};
-            String[] row3 = new String[]{"ACTIVITY TYPE:", spinnerMode};
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + steps_counter);
-            String[] row4 = new String[]{"COUNT OF ACTUAL STEPS:", Paces, "ESTIMATED NUMBER OF STEPS:", String.valueOf(steps_counter)};
-            String[] row5 = new String[]{};
-            String[] row6 = new String[]{"Time [sec]", "ACC X", "ACC Y", "ACC Z"};
-            CSVWriter csvWriter = new CSVWriter(new FileWriter(temp_csv,true));
-            csvWriter.writeNext(row1);
-            csvWriter.writeNext(row2);
-            csvWriter.writeNext(row3);
-            csvWriter.writeNext(row4);
-            csvWriter.writeNext(row5);
-            csvWriter.writeNext(row6);
-
-            int flag = 1;
-            for (int i = startIndex; i <= stopIndex ; i++)
-            {
-                String x = csvData.get(i)[0];
-                String y = csvData.get(i)[1];
-                String z = csvData.get(i)[2];
-                double t;
-                if (flag == 1) { t = Double.parseDouble(csvData.get(i)[3])/1000;}
-                else {t = Double.parseDouble(csvData.get(i)[3])/1000 - flag;}
-                String[] row = new String[]{String.valueOf(t), x, y, z};
-//                CSVWriter csvWriter = new CSVWriter(new FileWriter(temp_csv,true));
-                csvWriter.writeNext(row);
-            }
+            String csv = path + "data.csv";
+            CSVWriter csvWriter = new CSVWriter(new FileWriter(csv,true));
+            String row[]= new String[]{timeStamp,walk_txt,run_txt,jump_txt};
+            csvWriter.writeNext(row);
             csvWriter.close();
-
         } catch (IOException e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
-
     }
+
+
+
 
 }

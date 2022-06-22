@@ -29,11 +29,25 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/step_counter"
+        android:id="@+id/walk_counter"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
-        android:text="Step Counter" />
+        android:text="Walk Counter" />
+
+    <TextView
+        android:id="@+id/run_counter"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Run Counter" />
+
+    <TextView
+        android:id="@+id/jump_counter"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Jump Counter" />
 
     <LinearLayout
         android:layout_width="match_parent"
