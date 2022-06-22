@@ -427,10 +427,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //                    flag = 1;
 //                }
                 dialog.dismiss();
-
-                builder3.setView(view4);
-                dialog3 = builder3.create();
-                dialog3.show();
+//
+//                builder3.setView(view4);
+//                dialog3 = builder3.create();
+//                dialog3.show();
 
 
 
