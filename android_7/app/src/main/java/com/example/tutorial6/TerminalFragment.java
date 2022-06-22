@@ -91,18 +91,20 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     int startIndex = 0;
     int stopIndex = 1;
 
-    float rest_threshold = (float) 9;
+    float rest_threshold = (float) 9.8;
     float walk_threshold = (float) 11;
     float run_threshold = (float) 17;
-    float jump_threshold = (float) 6;
+    float jump_threshold = (float) 25;
 
     int walk_counter = 0;
     int run_counter = 0;
     int jump_counter = 0;
 
     float sum_jump_time = 0;
-    long sum_walk_time = 0;
-    long sum_run_time = 0;
+    float sum_walk_time = 0;
+    float sum_run_time = 0;
+    float sum_rest_time = 0;
+
 
     TextView walk_time_counter_txt;
     TextView run_time_counter_txt;
@@ -124,7 +126,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         setHasOptionsMenu(true);
         setRetainInstance(true);
         deviceAddress = getArguments().getString("device");
-
     }
 
     @Override
@@ -268,7 +269,11 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext()); // Should be this
         builder.setTitle("Enter Your Data");
-        View view2 = inflater.inflate(R.layout.layout_dialog, null);
+
+        View view2 = inflater.inflate(R.layout.layout_dialog, null);        builder.setView(view2);
+        dialog = builder.create();
+        dialog.show();
+
         EditText CSV_Name = view2.findViewById(R.id.CSV_Name);
         EditText Pace_counter = view2.findViewById(R.id.Pace_counter);
         Button PopUpSave = view2.findViewById(R.id.PopUpSave);
@@ -309,11 +314,11 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
         });
 
-        buttonSave.setVisibility(View.INVISIBLE);
-
-        if (sum_jump_time == 0){
-            buttonSave.setVisibility(View.VISIBLE);
-        }
+//        buttonSave.setVisibility(View.INVISIBLE);
+//
+//        if (sum_walk_time > 3){
+//            buttonSave.setVisibility(View.VISIBLE);
+//        }
 
 
 
@@ -348,6 +353,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
             }
         });
+
 
 
         PopUpSave.setOnClickListener(new View.OnClickListener() {
@@ -548,8 +554,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
 
+//                    #JUMP = 25
+//                    #REST = 9.8
+                    if (N > rest_threshold-0.2 && N < rest_threshold+0.2) {
+                        long finish = System.currentTimeMillis();
+                        sum_rest_time += (float) (finish - start)/1000;
+                        sum_rest_time += 0.5;
+                    }
 
-                    if (N > jump_threshold && N < rest_threshold) {
+                    else if (N > jump_threshold) {
                         jump_counter = jump_counter + 1;
                         long finish = System.currentTimeMillis();
                         sum_jump_time += (float) (finish - start)/1000;
@@ -561,7 +574,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                         sum_walk_time += (float) (finish - start)/1000;
                         sum_walk_time += 0.5;
                     }
-                    else if (N > run_threshold) {
+                    else if (N > run_threshold && N < jump_threshold) {
                         run_counter = run_counter + 1;
                         long finish = System.currentTimeMillis();
                         sum_run_time += (float) (finish - start)/1000;
