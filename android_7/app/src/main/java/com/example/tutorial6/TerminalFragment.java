@@ -103,9 +103,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     long sum_walk_time = 0;
     long sum_run_time = 0;
 
-    TextView walk_time_counter_txt;
-    TextView run_time_counter_txt;
-    TextView jump_time_counter_txt;
+    TextView walk_timer;
+    TextView run_timer;
+    TextView jump_timer;
 
     TextView walk_counter_txt;
     TextView run_counter_txt;
@@ -539,6 +539,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                         long finish = System.currentTimeMillis();
                         sum_run_time = finish - start;
                     }
+                    walk_timer.setText(String.valueOf(sum_walk_time));
+                    run_timer.setText(String.valueOf(sum_run_time));
+                    jump_timer.setText(String.valueOf(sum_jump_time));
+
                     walk_counter_txt.setText(String.valueOf(walk_counter));
                     run_counter_txt.setText(String.valueOf(run_counter));
                     jump_counter_txt.setText(String.valueOf(jump_counter));
