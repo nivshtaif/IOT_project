@@ -1,147 +1,517 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<RelativeLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/line_chart"
+    <!-- Card view for displaying the -->
+    <!-- Pie chart and details of pie chart -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewGraph"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:background="@color/white" />
+        android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:elevation="10dp"
+        android:background="@color/white"
+        app:cardCornerRadius="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+        <!--Linear layout to display pie chart -->
+        <!-- and details of pie chart-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="156dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!--Pie chart to display the data-->
+            <!--                org.eazegraph.lib.charts.PieChart-->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:padding="6dp"
+                android:background="@color/white" />
+
+            <!--Creating another linear layout -->
+            <!-- to display pie chart details -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical">
+
+                    <!--View to display the yellow color icon-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/red" />
+
+                    <!--Text view to display R -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:text="Walking" />
+
+                </LinearLayout>
+
+                <!--Linear layout to display Python-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp">
+
+                    <!--View to display the green color icon-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/green" />
+
+                    <!--Text view to display python text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:text="Running" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- Another Card view for displaying -->
+    <!-- Use of programming languages -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewWalk"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_below="@+id/cardViewGraph"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp">
+
+        <!--Relative layout to display -->
+        <!-- use of programming languages -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <!--Text view to use of -->
+            <!-- programming languages text-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="12dp"
+                android:text="Walking:"
+                android:textColor="@color/dark_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!--View to display the line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="5dp">
+
+                <!--Text view to display R -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Steps"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp" />
+
+                <!--Text view to display the -->
+                <!-- percentage of programming language -->
+                <!-- used. For now default set to 0-->
+                <TextView
+                    android:id="@+id/walk_count"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Walk Counter"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!--View to display the line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Timer"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp" />
+
+                <!--Text view to display the percentage -->
+                <!-- of programming language used. -->
+                <!-- For now default set to 0-->
+
+
+                <TextView
+                    android:id="@+id/walk_timer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Walk Timer"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewRun"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_below="@+id/cardViewWalk"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp">
+
+        <!--Relative layout to display -->
+        <!-- use of programming languages -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <!--Text view to use of -->
+            <!-- programming languages text-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:text="Running:"
+                android:textColor="@color/dark_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!--View to display the line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp">
+
+                <!--Text view to display R -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Steps"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp" />
+
+                <!--Text view to display the -->
+                <!-- percentage of programming language -->
+                <!-- used. For now default set to 0-->
+                <TextView
+                    android:id="@+id/run_count"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Walk Counter"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!--View to display the line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Timer"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp" />
+
+                <!--Text view to display the percentage -->
+                <!-- of programming language used. -->
+                <!-- For now default set to 0-->
+
+
+                <TextView
+                    android:id="@+id/run_timer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Walk Timer"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewJump"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_below="@+id/cardViewRun"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp">
+
+        <!--Relative layout to display -->
+        <!-- use of programming languages -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <!--Text view to use of -->
+            <!-- programming languages text-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:text="Jumping:"
+                android:textColor="@color/dark_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!--View to display the line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp">
+
+                <!--Text view to display R -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Steps"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp" />
+
+                <!--Text view to display the -->
+                <!-- percentage of programming language -->
+                <!-- used. For now default set to 0-->
+                <TextView
+                    android:id="@+id/jump_count"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Walk Counter"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!--View to display the line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Timer"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp" />
+
+                <!--Text view to display the percentage -->
+                <!-- of programming language used. -->
+                <!-- For now default set to 0-->
+
+
+                <TextView
+                    android:id="@+id/jump_timer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Walk Timer"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/SaveBtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="70dp">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/cardViewJump"
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:orientation="horizontal">
-
-    <TextView
-        android:id="@+id/walk_count"
-        android:layout_width="195dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="Walk Counter" />
-
-    <TextView
-        android:id="@+id/walk_timer"
-        android:layout_width="195dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="Walk Timer" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/run_count"
-            android:layout_width="195dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="Run Counter" />
-
-        <TextView
-            android:id="@+id/run_timer"
-            android:layout_width="195dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="Run Timer" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/jump_count"
-            android:layout_width="195dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="Jump Counter" />
-
-        <TextView
-            android:id="@+id/jump_timer"
-            android:layout_width="195dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="Jump Timer" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/StartBtn"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:layout_marginRight="7dp"
-            android:layout_marginLeft="7dp" />
-
-
-        <Button
-            android:id="@+id/SaveBtn"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:text="Save" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:text="open CSV"
-            android:layout_marginRight="7dp"
-            android:layout_marginLeft="7dp"/>
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:text="Clear" />
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="70dp">
-
-
-    </LinearLayout>
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="10dp"
+        android:text="Save" />
+    <!--    android:id="@+id/details"-->
 
 
     <TextView
@@ -155,31 +525,218 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 
-    <View
-        android:layout_width="match_parent"
-        android:background="?android:attr/listDivider"
-        android:layout_height="2dp" />
+<View
+android:layout_width="match_parent"
+android:background="?android:attr/listDivider"
+android:layout_height="2dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/send_text"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:inputType="text|textNoSuggestions"
-            android:singleLine="true" />
+<EditText
+    android:id="@+id/send_text"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:inputType="text|textNoSuggestions"
+    android:singleLine="true" />
 
-        <ImageButton
-            android:id="@+id/send_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_send_white_24dp" />
-    </LinearLayout>
-
-
+<!--<ImageButton-->
+<!--    android:id="@+id/send_btn"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    app:srcCompat="@drawable/ic_send_white_24dp" />-->
 </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical">-->
+
+
+
+<!--    <com.github.mikephil.charting.charts.LineChart-->
+<!--        android:id="@+id/line_chart"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="280dp"-->
+<!--        android:background="@color/white" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="70dp">-->
+
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/walk_count"-->
+<!--        android:layout_width="195dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Walk Counter" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/walk_timer"-->
+<!--        android:layout_width="195dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Walk Timer" />-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/run_count"-->
+<!--            android:layout_width="195dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Run Counter" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/run_timer"-->
+<!--            android:layout_width="195dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Run Timer" />-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/jump_count"-->
+<!--            android:layout_width="195dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Jump Counter" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/jump_timer"-->
+<!--            android:layout_width="195dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Jump Timer" />-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
+
+<!--&lt;!&ndash;        <Button&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/StartBtn"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="190dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Start"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginRight="7dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginLeft="7dp" />&ndash;&gt;-->
+
+
+<!--        <Button-->
+<!--            android:id="@+id/SaveBtn"-->
+<!--            android:layout_width="190dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="7dp"-->
+<!--            android:text="Save" />-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="58dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--&lt;!&ndash;        <Button&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/button2"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="190dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="open CSV"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginRight="7dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginLeft="7dp"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <Button&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/button1"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="190dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginRight="7dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Clear" />&ndash;&gt;-->
+<!--    </LinearLayout>-->
+
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="70dp">-->
+
+
+<!--    </LinearLayout>-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/receive_text"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="481dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:freezesText="true"-->
+<!--        android:gravity="bottom"-->
+<!--        android:scrollbars="vertical"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
+
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="?android:attr/listDivider"-->
+<!--        android:layout_height="2dp" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/send_text"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:inputType="text|textNoSuggestions"-->
+<!--            android:singleLine="true" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/send_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:srcCompat="@drawable/ic_send_white_24dp" />-->
+<!--    </LinearLayout>-->
+
+
+<!--</LinearLayout>-->
 

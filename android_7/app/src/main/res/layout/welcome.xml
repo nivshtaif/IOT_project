@@ -1,41 +1,344 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="50dp">
+    android:background="@color/white">
 
-    <Spinner
-        android:id="@+id/spinner"
+    <!-- Card view for displaying the -->
+    <!-- Pie chart and details of pie chart -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewGraph"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
-        android:layout_weight="2" />
+        android:layout_height="200dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:elevation="10dp"
+        android:background="@color/white"
+        app:cardCornerRadius="10dp">
 
-    <LinearLayout
-        android:layout_width="361dp"
-        android:layout_height="54dp"
-        android:layout_below="@+id/spinner"
+
+        <!--Linear layout to display pie chart -->
+        <!-- and details of pie chart-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="201dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!--Pie chart to display the data-->
+            <!--                org.eazegraph.lib.charts.PieChart-->
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/piechart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:padding="6dp"
+                tools:ignore="MissingClass"
+                android:background="@color/white"
+                />
+
+            <!--Creating another linear layout -->
+            <!-- to display pie chart details -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical">
+
+                    <!--View to display the yellow color icon-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/red" />
+
+                    <!--Text view to display R -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:text="Walking" />
+
+                </LinearLayout>
+
+                <!--Linear layout to display Python-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp">
+
+                    <!--View to display the green color icon-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/green" />
+
+                    <!--Text view to display python text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:text="Running" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- Another Card view for displaying -->
+    <!-- Use of programming languages -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_below="@+id/cardViewGraph"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp">
+
+        <!--Relative layout to display -->
+        <!-- use of programming languages -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <!--Text view to use of -->
+            <!-- programming languages text-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:text="Choose which session:"
+                android:textColor="@color/dark_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!--View to display the line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/light_grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp">
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="7dp"
+                    android:layout_weight="2"
+                    android:textColor="@color/dark_blue" />
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/allsessions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <RadioButton
+                    android:id="@+id/firstSession"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginStart="-2dp"
+                    android:layout_marginRight="192dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="firstSession"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/secondSession"
+                    android:layout_below="@+id/firstSession"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginStart="-2dp"
+                    android:layout_marginRight="192dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="secondSession"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+                </RadioGroup>
+
+                <!--Text view to display R -->
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:fontFamily="sans-serif-light"-->
+                <!--                    android:text="Walking distance"-->
+                <!--                    android:textColor="@color/dark_blue"-->
+                <!--                    android:textSize="18sp" />-->
+
+                <!--                &lt;!&ndash;Text view to display the &ndash;&gt;-->
+                <!--                &lt;!&ndash; percentage of programming language &ndash;&gt;-->
+                <!--                &lt;!&ndash; used. For now default set to 0&ndash;&gt;-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/dis_walk"-->
+                <!--                    android:layout_width="fill_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_alignParentRight="true"-->
+                <!--                    android:fontFamily="sans-serif-light"-->
+                <!--                    android:text="0"-->
+                <!--                    android:textAlignment="textEnd"-->
+                <!--                    android:textColor="@color/dark_blue"-->
+                <!--                    android:textSize="18sp"-->
+                <!--                    android:textStyle="bold" />-->
+            </RelativeLayout>
+
+            <!--View to display the line-->
+
+
+            <!--            <View-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="51dp"-->
+            <!--                android:layout_marginLeft="20dp"-->
+            <!--                android:layout_marginRight="20dp"-->
+            <!--                android:background="@color/light_grey" />-->
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+        <!--Relative layout to display -->
+        <!-- use of programming languages -->
+
+    <Button
+        android:id="@+id/welStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="0dp"
-        android:orientation="horizontal">
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="60dp"
+        android:elevation="10dp"
+        android:text="Start" />
 
-        <Button
-            android:id="@+id/welStart"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:text="Start" />
 
-        <Button
-            android:id="@+id/welBack"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:text="Back" />
-    </LinearLayout>
+
+    <!--    android:id="@+id/details"-->
 
 </RelativeLayout>
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/white">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:orientation="vertical"-->
+<!--        >-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="7dp"-->
+<!--        android:layout_weight="2" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="361dp"-->
+<!--        android:layout_height="54dp"-->
+<!--        android:layout_below="@+id/spinner"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginTop="300dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/welStart"-->
+<!--            android:layout_width="140dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="7dp"-->
+<!--            android:layout_marginRight="7dp"-->
+<!--            android:text="Start" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/exit_report"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="120dp"-->
+<!--            android:layout_marginLeft="120dp"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            android:layout_marginEnd="120dp"-->
+<!--            android:layout_marginRight="120dp"-->
+<!--            android:layout_marginBottom="60dp"-->
+<!--            android:elevation="10dp"-->
+<!--            android:text="Exit" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/welBack"-->
+<!--            android:layout_width="140dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="7dp"-->
+<!--            android:text="Back" />-->
+<!--    </LinearLayout>-->
+<!--    </LinearLayout>-->
+
+
+<!--</RelativeLayout>-->

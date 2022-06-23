@@ -25,6 +25,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -265,9 +267,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         mpLineChart.invalidate();
 
 
-        Button buttonClear = (Button) view.findViewById(R.id.button1);
-        Button buttonCsvShow = (Button) view.findViewById(R.id.button2);
-        Button buttonStart = (Button) view.findViewById(R.id.StartBtn);
+//        Button buttonClear = (Button) view.findViewById(R.id.button1); //CLEAR
+//        Button buttonCsvShow = (Button) view.findViewById(R.id.button2); //OPENCSV
+//        Button buttonStart = (Button) view.findViewById(R.id.StartBtn);
 //        Button buttonStop = (Button) view.findViewById(R.id.StopBtn);
         Button buttonSave = (Button) view.findViewById(R.id.SaveBtn);
 //        Button buttonReset = (Button) view.findViewById(R.id.ResetBtn);
@@ -321,8 +323,11 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         Spinner spinner = view2.findViewById(R.id.spinner);
 
         Button WelcomeStart = view3.findViewById(R.id.welStart);
-        Button WelcomeBack = view3.findViewById(R.id.welBack);
+
+//        Button WelcomeBack = view3.findViewById(R.id.welBack);
         Spinner Welcomespinner = view3.findViewById(R.id.spinner);
+        RadioGroup radioGroup = view3.findViewById(R.id.allsessions);
+
 
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.pace, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -338,61 +343,54 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             dialog2.show();
         }
 
-        buttonClear.setOnClickListener(new View.OnClickListener() {
+        radioGroup.clearCheck();
+
+        // Add the Listener to the RadioGroup
+        radioGroup.setOnCheckedChangeListener(
+                new RadioGroup
+                        .OnCheckedChangeListener() {
+                    @Override
+
+                    // The flow will come here when
+                    // any of the radio buttons in the radioGroup
+                    // has been clicked
+
+                    // Check which radio button has been clicked
+                    public void onCheckedChanged(RadioGroup group,
+                                                 int checkedId)
+                    {
+
+                        // Get the selected Radio Button
+                        RadioButton
+                                radioButton
+                                = (RadioButton)group
+                                .findViewById(checkedId);
+                    }
+                });
+
+        WelcomeStart.setOnClickListener(new View.OnClickListener() {
+                        @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"Clear",Toast.LENGTH_SHORT).show();
-                startIndex = GetIndex();
-                stopIndex = startIndex + 1;
-                walk_counter = 0;
-                run_counter = 0;
-                jump_counter = 0;
-                sum_walk_time = 0;
-                sum_run_time = 0;
-                sum_jump_time = 0;
-
-//                Date date = new Date();
-//                timeStamp = new SimpleDateFormat("ddMMyyyy HH:mm").format(Calendar.getInstance().getTime());
-                LineData data = mpLineChart.getData();
-                ILineDataSet set0 = data.getDataSetByIndex(0);
-//                ILineDataSet set1 = data.getDataSetByIndex(1);
-//                ILineDataSet set2 = data.getDataSetByIndex(2);
-                data.getDataSetByIndex(0);
-//                data.getDataSetByIndex(1);
-//                data.getDataSetByIndex(2);
-                while(set0.removeLast()){}
-                mpLineChart.setAutoScaleMinMaxEnabled(true);
-//                while(set1.removeLast()){}
-//                while(set2.removeLast()){}
-
-            }
-        });
-
-//        buttonSave.setVisibility(View.INVISIBLE);
-//
-//        if (sum_walk_time > 3){
-//            buttonSave.setVisibility(View.VISIBLE);
-//        }
 
 
+                // When submit button is clicked,
+                // Ge the Radio Button which is set
+                // If no Radio Button is set, -1 will be returned
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                if (selectedId == -1) {
+                }
+                else {
 
+                    RadioButton radioButton
+                            = (RadioButton)radioGroup
+                            .findViewById(selectedId);
+                    String text = radioButton.getText().toString();
 
-
-        buttonCsvShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenLoadCSV();
-
-            }
-        });
-
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"Start Counting Steps",Toast.LENGTH_SHORT).show();
-//                ArrayList<String[]> csvData = new ArrayList<>();
-//                csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
-//                startIndex = csvData.size();
-//                startIndex = (int) data.getXMax();
+                    // Now display the value of selected item
+                    // by the Toast message
+//                    if (radioButton.toString() == "secondSession")
+                    walk_counter_txt.setText(text);
+                }
                 startIndex = GetIndex();
                 walk_counter = 0;
                 run_counter = 0;
@@ -403,9 +401,73 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 sum_jump_time = 0;
 
                 timeStamp = new SimpleDateFormat("dd-MM-yyyy_HHmm").format(Calendar.getInstance().getTime());
+                dialog2.dismiss();
 
             }
+
         });
+// ניב מחק! נסיון להעלים כפתורים מדף בית... צריכים לקחת מםה את OPENCSV לדף סיכום
+//        buttonClear.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(),"Clear",Toast.LENGTH_SHORT).show();
+//                startIndex = GetIndex();
+//                stopIndex = startIndex + 1;
+//                walk_counter = 0;
+//                run_counter = 0;
+//                jump_counter = 0;
+//                sum_walk_time = 0;
+//                sum_run_time = 0;
+//                sum_jump_time = 0;
+//
+////                Date date = new Date();
+////                timeStamp = new SimpleDateFormat("ddMMyyyy HH:mm").format(Calendar.getInstance().getTime());
+//                LineData data = mpLineChart.getData();
+//                ILineDataSet set0 = data.getDataSetByIndex(0);
+////                ILineDataSet set1 = data.getDataSetByIndex(1);
+////                ILineDataSet set2 = data.getDataSetByIndex(2);
+//                data.getDataSetByIndex(0);
+////                data.getDataSetByIndex(1);
+////                data.getDataSetByIndex(2);
+//                while(set0.removeLast()){}
+//                mpLineChart.setAutoScaleMinMaxEnabled(true);
+////                while(set1.removeLast()){}
+////                while(set2.removeLast()){}
+//
+//            }
+//        });
+//
+//
+//
+//
+//        buttonCsvShow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                OpenLoadCSV();
+//
+//            }
+//        });
+
+//        buttonStart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(),"Start Counting Steps",Toast.LENGTH_SHORT).show();
+////                ArrayList<String[]> csvData = new ArrayList<>();
+////                csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
+////                startIndex = csvData.size();
+////                startIndex = (int) data.getXMax();
+//                startIndex = GetIndex();
+//                walk_counter = 0;
+//                run_counter = 0;
+//                jump_counter = 0;
+//
+//                sum_walk_time = 0;
+//                sum_run_time = 0;
+//                sum_jump_time = 0;
+//
+//                timeStamp = new SimpleDateFormat("dd-MM-yyyy_HHmm").format(Calendar.getInstance().getTime());
+//
+//            }
+//        });
 
 
 
@@ -462,30 +524,35 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
         });
 
-        WelcomeStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                String file_name = CSV_Name.getText().toString();
-//                String pace_counter = Pace_counter.getText().toString();
-                String spinner_mode = spinner.getSelectedItem().toString();
-//                String mode = spinner.getTransitionName();
-//                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
-//                walk_counter = 0;
-//                run_counter = 0;
-//                jump_counter = 0;
 
-                if (spinner_mode.equals("Walk")){
-                    session = 1;
-                    flag = 1;
-                }
-                else {
-                    session = 2;
-                    flag = 1;
-                }
-                dialog2.dismiss();
 
-            }
-        });
+
+
+//        WelcomeStart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                String file_name = CSV_Name.getText().toString();
+////                String pace_counter = Pace_counter.getText().toString();
+////                onRadioButtonClicked(v);
+//                String spinner_mode = Welcomespinner.getSelectedItem().toString();
+////                String mode = spinner.getTransitionName();
+////                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
+////                walk_counter = 0;
+////                run_counter = 0;
+////                jump_counter = 0;
+//                walk_counter_txt.setText(session);
+////                if (spinner_mode.equals("Walk")){
+////                    session = 1;
+////                    flag = 1;
+////                }
+////                else {
+////                    session = 2;
+////                    flag = 1;
+////                }
+//                dialog2.dismiss();
+//
+//            }
+//        });
 
 //        WelcomeSave.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -633,7 +700,17 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     private void receive(byte[] message) {
         if(hexEnabled) {
             receiveText.append(TextUtil.toHexString(message) + '\n');
+            if (session == 1){
+                jump_counter = 100000;
+                jump_counter_txt.setText(String.valueOf(jump_counter));
+            }
+
         } else {
+            if (session == 1){
+                jump_counter = 100000;
+                jump_counter_txt.setText(String.valueOf(jump_counter));
+            }
+
             String msg = new String(message);
             long start = System.currentTimeMillis();
             if(newline.equals(TextUtil.newline_crlf) && msg.length() > 0) {
@@ -675,7 +752,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
                     if (session == 1){
-                        jump_counter = 10000000;
+                        jump_counter = 100000;
+                        jump_counter_txt.setText(String.valueOf(jump_counter));
                     }
 
 //                    #JUMP = 25
@@ -930,7 +1008,27 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         }
     }
 
-
+//    public void onRadioButtonClicked(View view) {
+//        // Is the button now checked?
+//        int f=2;
+//        boolean checked = ((RadioButton) view).isChecked();
+//
+//        // Check which radio button was clicked
+//        switch(view.getId()) {
+//            case R.id.firstSession:
+//                if (checked){
+//                    session=1;
+//                    break;
+//                }
+//
+//            case R.id.secondSession:
+//                if (checked)
+//                    if (checked){
+//                        session=0;
+//                        break;
+//                    }
+//        }
+//    }
 
 
 }
