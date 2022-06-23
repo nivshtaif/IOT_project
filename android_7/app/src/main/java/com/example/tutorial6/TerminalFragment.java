@@ -237,8 +237,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         sendText.addTextChangedListener(hexWatcher);
         sendText.setHint(hexEnabled ? "HEX mode" : "");
 
-        View sendBtn = view.findViewById(R.id.send_btn);
-        sendBtn.setOnClickListener(v -> send(sendText.getText().toString()));
+//        View sendBtn = view.findViewById(R.id.send_btn);
+//        sendBtn.setOnClickListener(v -> send(sendText.getText().toString()));
 
         mpLineChart = (LineChart) view.findViewById(R.id.line_chart);
 //        lineDataSet0 =  new LineDataSet(emptyDataValues(), "Xt");

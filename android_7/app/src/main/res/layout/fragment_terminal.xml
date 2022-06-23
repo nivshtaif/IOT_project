@@ -115,7 +115,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="0dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp">
 
@@ -242,9 +242,9 @@
         android:layout_height="150dp"
         android:layout_below="@+id/cardViewWalk"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp">
 
@@ -371,7 +371,7 @@
         android:layout_height="150dp"
         android:layout_below="@+id/cardViewRun"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="5dp"
         android:elevation="10dp"
@@ -518,6 +518,13 @@
         android:id="@+id/receive_text"
         android:layout_width="match_parent"
         android:layout_height="481dp"
+        android:layout_alignStart="@+id/SaveBtn"
+        android:layout_alignLeft="@+id/SaveBtn"
+        android:layout_marginStart="0dp"
+        android:layout_toStartOf="@+id/SaveBtn"
+        android:layout_toLeftOf="@+id/SaveBtn"
+
+
         android:layout_weight="1"
         android:freezesText="true"
         android:gravity="bottom"
@@ -540,6 +547,11 @@ android:orientation="horizontal">
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
+    android:layout_alignStart="@+id/SaveBtn"
+    android:layout_alignLeft="@+id/SaveBtn"
+    android:layout_marginStart="0dp"
+    android:layout_toStartOf="@+id/SaveBtn"
+    android:layout_toLeftOf="@+id/SaveBtn"
     android:inputType="text|textNoSuggestions"
     android:singleLine="true" />
 
