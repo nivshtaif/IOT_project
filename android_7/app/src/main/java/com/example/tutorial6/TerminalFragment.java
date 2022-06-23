@@ -332,7 +332,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //        Button WelcomeBack = view3.findViewById(R.id.welBack);
 //        Spinner Welcomespinner = view3.findViewById(R.id.spinner);
         RadioGroup radioGroup = view3.findViewById(R.id.allsessions);
-
+        RadioButton rad1 = view3.findViewById(R.id.firstSession);
+        rad1.setChecked(true);
 
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.pace, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
