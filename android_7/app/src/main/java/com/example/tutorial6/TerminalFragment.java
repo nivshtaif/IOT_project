@@ -349,7 +349,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             dialog2.show();
         }
 
-        radioGroup.clearCheck();
+//        radioGroup.clearCheck();
 
         // Add the Listener to the RadioGroup
         radioGroup.setOnCheckedChangeListener(
@@ -419,6 +419,17 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
 
         });
+
+        if (session == 1){
+            walk_ses = 60;
+            run_ses = 60;
+            jump_ses = 60;
+        }
+        else if (session == 2){
+            walk_ses = 180;
+            run_ses = 180;
+            jump_ses = 180;
+        }
 // ניב מחק! נסיון להעלים כפתורים מדף בית... צריכים לקחת מםה את OPENCSV לדף סיכום
 //        buttonClear.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
@@ -526,7 +537,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     ArrayList<String[]> csvData = new ArrayList<>();
                     csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
                     stopIndex = csvData.size();
-                    dialog.show();
+
+                    builder3.setView(view4);
+                    dialog3 = builder3.create();
+                    dialog3.show();
                 }
                 else{
                     Toast.makeText(getContext(),"Keep Moving..",Toast.LENGTH_SHORT).show();
@@ -721,7 +735,16 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
 
         } else {
-
+            if (trSession.toString() == "Easy Session"){
+                walk_ses = 60;
+                run_ses = 60;
+                jump_ses = 60;
+            }
+            else if (trSession.toString() == "Hard Session"){
+                walk_ses = 180;
+                run_ses = 180;
+                jump_ses = 180;
+            }
 
             String msg = new String(message);
             long start = System.currentTimeMillis();
@@ -763,17 +786,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_y = (float) Math.pow(Float.parseFloat(parts[1]), 2);
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
-
-                    if (trSession.toString() == "Easy Session"){
-                        walk_ses = 60;
-                        run_ses = 60;
-                        jump_ses = 60;
-                    }
-                    else if (trSession.toString() == "Hard Session"){
-                        walk_ses = 180;
-                        run_ses = 180;
-                        jump_ses = 180;
-                    }
 
 
 //                    #JUMP = 25
