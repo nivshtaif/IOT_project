@@ -16,92 +16,33 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:elevation="10dp"
+        android:layout_marginRight="20dp"
         android:background="@color/white"
+        android:elevation="10dp"
         app:cardCornerRadius="10dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Welcome...."
+            android:textColor="@color/dark_blue"
+            android:textSize="50sp"
+            android:textStyle="bold" />
 
         <!--Linear layout to display pie chart -->
         <!-- and details of pie chart-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="201dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
 
-            <!--Pie chart to display the data-->
-            <!--                org.eazegraph.lib.charts.PieChart-->
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/piechart"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:padding="6dp"
-                tools:ignore="MissingClass"
-                android:background="@color/white"
-                />
 
-            <!--Creating another linear layout -->
-            <!-- to display pie chart details -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                >
+        <!--Pie chart to display the data-->
+        <!--                org.eazegraph.lib.charts.PieChart-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical">
 
-                    <!--View to display the yellow color icon-->
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/red" />
+        <!--Creating another linear layout -->
+        <!-- to display pie chart details -->
 
-                    <!--Text view to display R -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="Walking" />
-
-                </LinearLayout>
-
-                <!--Linear layout to display Python-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp">
-
-                    <!--View to display the green color icon-->
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/green" />
-
-                    <!--Text view to display python text -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="Running" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -111,7 +52,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDistance"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="300dp"
         android:layout_below="@+id/cardViewGraph"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
@@ -135,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="20dp"
-                android:text="Choose which session:"
+                android:text="Which training session \ndo you want to do:"
                 android:textColor="@color/dark_blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -151,56 +92,75 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="208dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="10dp">
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="7dp"
-                    android:layout_weight="2"
-                    android:textColor="@color/dark_blue" />
+
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/allsessions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                <RadioButton
-                    android:id="@+id/firstSession"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="-2dp"
-                    android:layout_marginRight="192dp"
-                    android:fontFamily="sans-serif-light"
-                    android:text="firstSession"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
 
-                    />
+                    <RadioButton
+                        android:id="@+id/firstSession"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginRight="192dp"
+                        android:buttonTint="@color/cardview_dark_background"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Easy Session"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                <RadioButton
-                    android:id="@+id/secondSession"
-                    android:layout_below="@+id/firstSession"
+                    <TextView
+                        android:id="@+id/firstExplain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/firstSession"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="60dp"
+                        android:text="1 min Walking\n1 min running\n1 min Jumping"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="-2dp"
-                    android:layout_marginRight="192dp"
-                    android:fontFamily="sans-serif-light"
-                    android:text="secondSession"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    />
+                    <RadioButton
+                        android:id="@+id/secondSession"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/firstExplain"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginRight="192dp"
+                        android:buttonTint="@color/cardview_dark_background"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Hard Session"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/secExplain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/secondSession"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="60dp"
+                        android:text="3 min Walking\n3 min running\n3 min Jumping"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                 </RadioGroup>
 

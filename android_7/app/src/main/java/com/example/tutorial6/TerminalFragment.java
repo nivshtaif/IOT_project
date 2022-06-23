@@ -116,6 +116,11 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     float sum_run_time = 0;
     float sum_rest_time = 0;
 
+    float jump_ses;
+    float run_ses;
+    float walk_ses;
+
+
     TextView walk_time_counter_txt;
     TextView run_time_counter_txt;
     TextView jump_time_counter_txt;
@@ -140,7 +145,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     AlertDialog dialog3;
 
 
-
+    TextView trSession;
     int session;
     /*
      * Lifecycle
@@ -320,22 +325,22 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         EditText Pace_counter = view2.findViewById(R.id.Pace_counter);
         Button PopUpSave = view2.findViewById(R.id.PopUpSave);
         Button PopUpBack = view2.findViewById(R.id.PopUpBack);
-        Spinner spinner = view2.findViewById(R.id.spinner);
+//        Spinner spinner = view2.findViewById(R.id.spinner);
 
         Button WelcomeStart = view3.findViewById(R.id.welStart);
 
 //        Button WelcomeBack = view3.findViewById(R.id.welBack);
-        Spinner Welcomespinner = view3.findViewById(R.id.spinner);
+//        Spinner Welcomespinner = view3.findViewById(R.id.spinner);
         RadioGroup radioGroup = view3.findViewById(R.id.allsessions);
 
 
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.pace, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
-        spinner.setOnItemSelectedListener(this);
-
-        Welcomespinner.setAdapter(arrayAdapter);
-        Welcomespinner.setOnItemSelectedListener(this);
+//        spinner.setAdapter(arrayAdapter);
+//        spinner.setOnItemSelectedListener(this);
+//
+//        Welcomespinner.setAdapter(arrayAdapter);
+//        Welcomespinner.setOnItemSelectedListener(this);
 
         builder2.setView(view3);
         dialog2 = builder2.create();
@@ -378,6 +383,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 // If no Radio Button is set, -1 will be returned
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 if (selectedId == -1) {
+
                 }
                 else {
 
@@ -389,8 +395,14 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     // Now display the value of selected item
                     // by the Toast message
 //                    if (radioButton.toString() == "secondSession")
-                    walk_counter_txt.setText(text);
+                    if (text == "Easy Session"){
+                        session = 1;
+                    }
+                    else if (text == "Hard Session"){
+                        session = 2;
+                    }
                 }
+//                trSession.setText(text);
                 startIndex = GetIndex();
                 walk_counter = 0;
                 run_counter = 0;
@@ -508,12 +520,17 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Entry> dataVals = new ArrayList<Entry>();
-                ArrayList<String[]> csvData = new ArrayList<>();
-                csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
-                stopIndex = csvData.size();
-                dialog.show();
+                if(sum_walk_time>=walk_ses && sum_run_time>=jump_ses && sum_jump_time>=jump_ses) {
+                    ArrayList<Entry> dataVals = new ArrayList<Entry>();
+                    ArrayList<String[]> csvData = new ArrayList<>();
+                    csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
+                    stopIndex = csvData.size();
+                    dialog.show();
+                }
+                else{
+                    Toast.makeText(getContext(),"Keep Moving..",Toast.LENGTH_SHORT).show();
 
+                }
             }
         });
 
@@ -700,16 +717,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     private void receive(byte[] message) {
         if(hexEnabled) {
             receiveText.append(TextUtil.toHexString(message) + '\n');
-            if (session == 1){
-                jump_counter = 100000;
-                jump_counter_txt.setText(String.valueOf(jump_counter));
-            }
+
 
         } else {
-            if (session == 1){
-                jump_counter = 100000;
-                jump_counter_txt.setText(String.valueOf(jump_counter));
-            }
+
 
             String msg = new String(message);
             long start = System.currentTimeMillis();
@@ -751,10 +762,18 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_y = (float) Math.pow(Float.parseFloat(parts[1]), 2);
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
                     float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
-                    if (session == 1){
-                        jump_counter = 100000;
-                        jump_counter_txt.setText(String.valueOf(jump_counter));
+
+                    if (trSession.toString() == "Easy Session"){
+                        walk_ses = 60;
+                        run_ses = 60;
+                        jump_ses = 60;
                     }
+                    else if (trSession.toString() == "Hard Session"){
+                        walk_ses = 180;
+                        run_ses = 180;
+                        jump_ses = 180;
+                    }
+
 
 //                    #JUMP = 25
 //                    #REST = 9.8
