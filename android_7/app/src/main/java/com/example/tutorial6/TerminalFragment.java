@@ -374,6 +374,16 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     }
                 });
 
+        PopUpExit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+            public void onClick(View v) {
+                dialog3.dismiss();
+                builder3.setView(view4);
+                dialog3 = builder3.create();
+                dialog3.show();
+            }
+        });
+
         WelcomeStart.setOnClickListener(new View.OnClickListener() {
                         @Override
             public void onClick(View v) {
