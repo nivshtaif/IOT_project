@@ -11,12 +11,54 @@
 
     <!-- Card view for displaying the -->
     <!-- Pie chart and details of pie chart -->
+
+    <!-- Another Card view for displaying -->
+    <!-- Use of programming languages -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewFirst"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:text="Awesome Workout !!!"
+            android:textColor="@color/white"
+            android:textSize="55sp"
+            android:textStyle="bold" />
+
+        <!--Linear layout to display pie chart -->
+        <!-- and details of pie chart-->
+
+
+        <!--Pie chart to display the data-->
+        <!--                org.eazegraph.lib.charts.PieChart-->
+
+
+        <!--Creating another linear layout -->
+        <!-- to display pie chart details -->
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewGraph"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_below="@id/cardViewFirst"
         android:layout_marginTop="20dp"
         android:elevation="10dp"
         android:background="@color/white"
@@ -29,77 +71,141 @@
             android:layout_width="match_parent"
             android:layout_height="201dp"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <!--Pie chart to display the data-->
             <!--                org.eazegraph.lib.charts.PieChart-->
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/piechart"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:padding="6dp"
-                tools:ignore="MissingClass"
-                android:background="@color/white"
-                />
+<!--            <com.github.mikephil.charting.charts.PieChart-->
+<!--                android:id="@+id/piechart"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginBottom="15dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:padding="6dp"-->
+<!--                tools:ignore="MissingClass"-->
+<!--                android:background="@color/white"-->
+<!--                />-->
 
             <!--Creating another linear layout -->
             <!-- to display pie chart details -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                >
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical">
+                <TextView
+                    android:id="@+id/walk_h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Walk"
+                    android:lines="2"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
 
-                    <!--View to display the yellow color icon-->
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/red" />
+                <TextView
+                    android:id="@+id/walk_cir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_textview"
+                    android:gravity="center"
+                    android:text="H"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
 
-                    <!--Text view to display R -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="Walking" />
-
-                </LinearLayout>
-
-                <!--Linear layout to display Python-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp">
-
-                    <!--View to display the green color icon-->
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/green" />
-
-                    <!--Text view to display python text -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="Running" />
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/walk_sc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="# Steps"
+                    android:lines="2"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/run_h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Run"
+                    android:lines="2"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/run_cir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_textview"
+                    android:gravity="center"
+                    android:text="H"
+                    android:textColor="@android:color/white"
+                    android:textSize="28sp" />
+                <TextView
+                    android:id="@+id/run_sc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="# Steps"
+                    android:lines="2"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/jump_h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Jump"
+                android:lines="2"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/jump_cir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_textview"
+                android:gravity="center"
+                android:text="H"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/jump_sc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="# Secs"
+                    android:lines="2"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+        </LinearLayout>
+
 
         </LinearLayout>
 
@@ -135,136 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="20dp"
-                android:text="How far have you come:"
-                android:textColor="@color/dark_blue"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!--View to display the line-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/light_grey" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp">
-
-                <!--Text view to display R -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Walking distance"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp" />
-
-                <!--Text view to display the -->
-                <!-- percentage of programming language -->
-                <!-- used. For now default set to 0-->
-                <TextView
-                    android:id="@+id/dis_walk"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:fontFamily="sans-serif-light"
-                    android:text="0"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!--View to display the line-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/light_grey" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Running distance"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp" />
-
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
-
-                <TextView
-                    android:id="@+id/dis_run"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:fontFamily="sans-serif-light"
-                    android:text="0"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/light_grey" />
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewStep"
-        android:layout_width="wrap_content"
-        android:layout_height="208dp"
-        android:layout_above="@+id/exit_report"
-        android:layout_below="@+id/cardViewDistance"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp">
-
-        <!--Relative layout to display -->
-        <!-- use of programming languages -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="196dp"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-            <!--Text view to use of -->
-            <!-- programming languages text-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
-                android:text="Step Count:"
+                android:text="Distance (m):"
                 android:textColor="@color/dark_blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -299,7 +276,7 @@
                 <!-- percentage of programming language -->
                 <!-- used. For now default set to 0-->
                 <TextView
-                    android:id="@+id/step_walk"
+                    android:id="@+id/dis_walk"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -340,48 +317,7 @@
                 <!-- For now default set to 0-->
 
                 <TextView
-                    android:id="@+id/step_run"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:fontFamily="sans-serif-light"
-                    android:text="0"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/light_grey" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Jumping"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp" />
-
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
-
-                <TextView
-                    android:id="@+id/step_jump"
+                    android:id="@+id/dis_run"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -405,6 +341,9 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+
+
 
     <Button
         android:id="@+id/exit_report"

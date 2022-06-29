@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="1000dp"
     android:background="@color/white">
 
     <!-- Card view for displaying the -->
@@ -95,8 +95,9 @@
                 android:layout_height="208dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginRight="25dp">
+
+            android:layout_marginBottom="10dp">
 
 
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -130,7 +131,7 @@
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginStart="60dp"
-                        android:text="1 min Walking\n1 min running\n1 min Jumping"
+                        android:text="10 sec Walking\n10 sec Running\n3 Jumps"
                         android:textColor="@color/cardview_dark_background"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -159,7 +160,7 @@
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginStart="60dp"
-                        android:text="3 min Walking\n3 min running\n3 min Jumping"
+                        android:text="3 min Walking\n3 min Running\n3 min Jumping"
                         android:textColor="@color/cardview_dark_background"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -208,20 +209,34 @@
 
         <!--Relative layout to display -->
         <!-- use of programming languages -->
-
     <Button
-        android:id="@+id/welStart"
+        android:id="@+id/welCal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="0dp"
+        android:layout_below="@+id/cardViewDistance"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:elevation="10dp"
+        android:text="Calibrate" />
+
+
+    <Button
+        android:id="@+id/welStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welCal"
         android:layout_marginStart="120dp"
         android:layout_marginLeft="120dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="120dp"
         android:layout_marginRight="120dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/dark_blue"
         android:elevation="10dp"
         android:text="Start" />
 

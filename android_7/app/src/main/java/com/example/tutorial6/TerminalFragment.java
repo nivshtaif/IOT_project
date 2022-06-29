@@ -98,18 +98,27 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     LineData data;
 
     int flag = 0;
+    int calibrate = 0;
+    int save = 0;
 
     int startIndex = 0;
     int stopIndex = 1;
 
+    float max_axis = 0;
+    float axis;
+
     float rest_threshold = (float) 9.8;
-    float walk_threshold = (float) 11;
-    float run_threshold = (float) 17;
-    float jump_threshold = (float) 25;
+    float walk_threshold = (float) 12.0;
+    float run_threshold = (float) 21.0;
+    float jump_threshold = (float) 25.0;
 
     int walk_counter = 0;
+    int walk_final = 0;
     int run_counter = 0;
+    int run_final = 0;
     int jump_counter = 0;
+    int jump_final = 0;
+
 
     float sum_jump_time = 0;
     float sum_walk_time = 0;
@@ -132,9 +141,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     float training_time;
     TextView dis_walk;
     TextView dis_run;
-    TextView step_walk;
-    TextView step_run;
-    TextView step_jump;
+
+    TextView cir_walk;
+    TextView cir_run;
+    TextView cir_jump;
     PieChart pieChart;
     float walk_dis;
     float run_dis;
@@ -276,6 +286,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //        Button buttonCsvShow = (Button) view.findViewById(R.id.button2); //OPENCSV
 //        Button buttonStart = (Button) view.findViewById(R.id.StartBtn);
 //        Button buttonStop = (Button) view.findViewById(R.id.StopBtn);
+
         Button buttonSave = (Button) view.findViewById(R.id.SaveBtn);
 //        Button buttonReset = (Button) view.findViewById(R.id.ResetBtn);
 
@@ -313,12 +324,16 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         // Link those objects with their respective
         // id's that we have given in .XML file
-        pieChart = view4.findViewById(R.id.piechart);
+//        pieChart = view4.findViewById(R.id.piechart);
+        cir_walk = view4.findViewById(R.id.walk_cir);
+        cir_run = view4.findViewById(R.id.run_cir);
+        cir_jump = view4.findViewById(R.id.jump_cir);
+
         dis_walk = view4.findViewById(R.id.dis_walk);
         dis_run = view4.findViewById(R.id.dis_run);
-        step_walk = view4.findViewById(R.id.step_walk);
-        step_run = view4.findViewById(R.id.step_run);
-        step_jump = view4.findViewById(R.id.step_jump);
+//        step_walk = view4.findViewById(R.id.step_walk);
+//        step_run = view4.findViewById(R.id.step_run);
+//        step_jump = view4.findViewById(R.id.step_jump);
         Button PopUpExit = view4.findViewById(R.id.exit_report);
 
         EditText CSV_Name = view2.findViewById(R.id.CSV_Name);
@@ -328,6 +343,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //        Spinner spinner = view2.findViewById(R.id.spinner);
 
         Button WelcomeStart = view3.findViewById(R.id.welStart);
+        Button WelcomeCal = view3.findViewById(R.id.welCal);
+
 
 //        Button WelcomeBack = view3.findViewById(R.id.welBack);
 //        Spinner Welcomespinner = view3.findViewById(R.id.spinner);
@@ -388,58 +405,77 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                         @Override
             public void onClick(View v) {
 
-
-                // When submit button is clicked,
-                // Ge the Radio Button which is set
-                // If no Radio Button is set, -1 will be returned
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                if (selectedId == -1) {
-
+                if(calibrate == 0){
+                    Toast.makeText(getContext(),"Calibration is required before starting..",Toast.LENGTH_SHORT).show();
                 }
-                else {
+                else if(calibrate == 1) {
+                    // When submit button is clicked,
+                    // Ge the Radio Button which is set
+                    // If no Radio Button is set, -1 will be returned
+                    int selectedId = radioGroup.getCheckedRadioButtonId();
+                    if (selectedId == -1) {
 
-                    RadioButton radioButton
-                            = (RadioButton)radioGroup
-                            .findViewById(selectedId);
-                    String text = radioButton.getText().toString();
+                    } else {
 
-                    // Now display the value of selected item
-                    // by the Toast message
+                        RadioButton radioButton
+                                = (RadioButton) radioGroup
+                                .findViewById(selectedId);
+                        String text = radioButton.getText().toString();
+
+                        // Now display the value of selected item
+                        // by the Toast message
 //                    if (radioButton.toString() == "secondSession")
-                    if (text == "Easy Session"){
-                        session = 1;
+                        if (text.equals("Easy Session")) {
+                            session = 1;
+//                            walk_ses = 60;
+//                            run_ses = 30;
+//                            jump_ses = 10;
+                            walk_ses = 10;
+                            run_ses = 5;
+                            jump_ses = 3;
+                        } else if (text.equals("Hard Session")) {
+                            session = 2;
+                            walk_ses = 180;
+                            run_ses = 180;
+                            jump_ses = 180;
+                        }
                     }
-                    else if (text == "Hard Session"){
-                        session = 2;
-                    }
-                }
 //                trSession.setText(text);
-                startIndex = GetIndex();
-                walk_counter = 0;
-                run_counter = 0;
-                jump_counter = 0;
+                    startIndex = GetIndex();
+                    walk_counter = 0;
+                    run_counter = 0;
+                    jump_counter = 0;
 
-                sum_walk_time = 0;
-                sum_run_time = 0;
-                sum_jump_time = 0;
+                    sum_walk_time = 0;
+                    sum_run_time = 0;
+                    sum_jump_time = 0;
 
-                timeStamp = new SimpleDateFormat("dd-MM-yyyy_HHmm").format(Calendar.getInstance().getTime());
-                dialog2.dismiss();
-
+                    timeStamp = new SimpleDateFormat("dd-MM-yyyy_HHmm").format(Calendar.getInstance().getTime());
+                    dialog2.dismiss();
+                }
             }
 
         });
 
-        if (session == 1){
-            walk_ses = 60;
-            run_ses = 60;
-            jump_ses = 60;
-        }
-        else if (session == 2){
-            walk_ses = 180;
-            run_ses = 180;
-            jump_ses = 180;
-        }
+        WelcomeCal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                calibrate = 1;
+            }
+
+        });
+
+//        if (session == 1){
+//            walk_ses = 60;
+//            run_ses = 60;
+//            jump_ses = 60;
+//        }
+//        else if (session == 2){
+//            walk_ses = 180;
+//            run_ses = 180;
+//            jump_ses = 180;
+//        }
 // ניב מחק! נסיון להעלים כפתורים מדף בית... צריכים לקחת מםה את OPENCSV לדף סיכום
 //        buttonClear.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
@@ -512,7 +548,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //                String pace_counter = Pace_counter.getText().toString();
 //                String spinner_mode = spinner.getSelectedItem().toString();
 //                String mode = spinner.getTransitionName();
-                OpenSaveCSV("/sdcard/csv_dir/", String.valueOf(walk_counter), String.valueOf(run_counter), String.valueOf(jump_counter));
+                String ses;
+                if(session == 1) {
+                    ses = "Easy Session";
+                }
+                else {
+                    ses = "Hard Session";
+                }
+
+                OpenSaveCSV("/sdcard/csv_dir/", ses,String.valueOf(walk_counter), String.valueOf(sum_walk_time), String.valueOf(run_counter), String.valueOf(sum_run_time), String.valueOf(jump_counter), String.valueOf(sum_jump_time));
 //                walk_counter = 0;
 //                run_counter = 0;
 //                jump_counter = 0;
@@ -542,19 +586,27 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sum_walk_time>=walk_ses && sum_run_time>=jump_ses && sum_jump_time>=jump_ses) {
-                    ArrayList<Entry> dataVals = new ArrayList<Entry>();
-                    ArrayList<String[]> csvData = new ArrayList<>();
-                    csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
-                    stopIndex = csvData.size();
-
+                if(sum_walk_time>=walk_ses && sum_run_time>=run_ses && jump_counter>=jump_ses) {
+//                    ArrayList<Entry> dataVals = new ArrayList<Entry>();
+//                    ArrayList<String[]> csvData = new ArrayList<>();
+//                    csvData = CsvRead("/storage/self/primary/Terminal/data.csv");
+//                    stopIndex = csvData.size();
+                    String ses;
+                    if(session == 1) {
+                        ses = "Easy Session";
+                    }
+                    else {
+                        ses = "Hard Session";
+                    }
+                    OpenSaveCSV("/sdcard/csv_dir/", ses, String.valueOf(walk_counter), String.valueOf(sum_walk_time), String.valueOf(run_counter), String.valueOf(sum_run_time), String.valueOf(jump_counter), String.valueOf(sum_jump_time));
+                    save = 1;
                     builder3.setView(view4);
                     dialog3 = builder3.create();
                     dialog3.show();
                 }
                 else{
                     Toast.makeText(getContext(),"Keep Moving..",Toast.LENGTH_SHORT).show();
-
+//
                 }
             }
         });
@@ -744,17 +796,18 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             receiveText.append(TextUtil.toHexString(message) + '\n');
 
 
-        } else {
-            if (trSession.toString() == "Easy Session"){
-                walk_ses = 60;
-                run_ses = 60;
-                jump_ses = 60;
-            }
-            else if (trSession.toString() == "Hard Session"){
-                walk_ses = 180;
-                run_ses = 180;
-                jump_ses = 180;
-            }
+        }
+//        else {
+//            if (trSession.toString() == "Easy Session"){
+//                walk_ses = 60;
+//                run_ses = 60;
+//                jump_ses = 60;
+//            }
+//            else if (trSession.toString() == "Hard Session"){
+//                walk_ses = 180;
+//                run_ses = 180;
+//                jump_ses = 180;
+//            }
 
             String msg = new String(message);
             long start = System.currentTimeMillis();
@@ -795,73 +848,111 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     float acc_x = (float) Math.pow(Float.parseFloat(parts[0]), 2);
                     float acc_y = (float) Math.pow(Float.parseFloat(parts[1]), 2);
                     float acc_z = (float) Math.pow(Float.parseFloat(parts[2]), 2);
-                    float N = (float) Math.sqrt(acc_x + acc_y +acc_z);
+                    float N = (float) Math.sqrt(acc_x + acc_y + acc_z);
 
+                    if(save == 0) {
+
+                        if (calibrate == 1) {
+                            rest_threshold = N;
+
+                            max_axis = Math.max((Math.abs(acc_x)),(Math.abs(acc_y)));
+                            max_axis = Math.max(max_axis,(Math.abs(acc_z)));
+                            if (max_axis == acc_x) {
+                                axis = (float) Math.pow(Float.parseFloat(parts[0]), 2);
+                            }
+                            else if (max_axis == acc_y) {
+                                axis = (float) Math.pow(Float.parseFloat(parts[1]), 2);
+                            }
+                            else{
+                                axis = (float) Math.pow(Float.parseFloat(parts[2]), 2);
+                            }
+
+                            calibrate = 0;
+                        }
 
 //                    #JUMP = 25
 //                    #REST = 9.8
-                    if (N > rest_threshold-0.2 && N < rest_threshold+0.2) {
-                        long finish = System.currentTimeMillis();
-                        sum_rest_time += (float) (finish - start)/1000;
-                        sum_rest_time += 0.5;
-                    }
+                        if (N > rest_threshold - 0.3 && N < rest_threshold + 0.3) {
+                            long finish = System.currentTimeMillis();
+                            sum_rest_time += (float) (finish - start) / 1000;
+                            sum_rest_time += 0.5;
+                        //JUMP
+//                        } else if ((N >= rest_threshold - 20.5 && N <= rest_threshold - 6.8)) {
+                        } else if (((Math.abs(axis) >= max_axis + 3) || ((N >= rest_threshold - 20.5 && N <= rest_threshold - 6.8)))) {
+                            jump_counter = jump_counter + 1;
+                            long finish = System.currentTimeMillis();
+                            sum_jump_time += (float) (finish - start) / 1000;
+                            sum_jump_time += 0.5;
+                        } else if ((N >= rest_threshold - 4.5 && N <= rest_threshold - 0.5) || (N >= rest_threshold + 0.5 && N <= rest_threshold + 5)) {
+                            walk_counter = walk_counter + 1;
+                            long finish = System.currentTimeMillis();
+                            sum_walk_time += (float) (finish - start) / 1000;
+                            sum_walk_time += 0.5;
+                        } else if ((N >= rest_threshold + 8 && N <= rest_threshold + 20)) {
+                            run_counter = run_counter + 1;
+                            long finish = System.currentTimeMillis();
+                            sum_run_time += (float) (finish - start) / 1000;
+                            sum_run_time += 0.5;
+                        }
 
-                    else if (N > jump_threshold) {
-                        jump_counter = jump_counter + 1;
-                        long finish = System.currentTimeMillis();
-                        sum_jump_time += (float) (finish - start)/1000;
-                        sum_jump_time += 0.5;
-                    }
-                    else if (N > walk_threshold && N < run_threshold) {
-                        walk_counter = walk_counter + 1;
-                        long finish = System.currentTimeMillis();
-                        sum_walk_time += (float) (finish - start)/1000;
-                        sum_walk_time += 0.5;
-                    }
-                    else if (N > run_threshold && N < jump_threshold) {
-                        run_counter = run_counter + 1;
-                        long finish = System.currentTimeMillis();
-                        sum_run_time += (float) (finish - start)/1000;
-                        sum_run_time += 0.5;
-                    }
+                        if((sum_walk_time <= walk_ses)){
+                            walk_time_counter_txt.setText(String.format("%.02f", ((sum_walk_time / walk_ses) * 100)) + "%");
+                            walk_counter_txt.setText(String.valueOf(walk_counter));
+                            sum_run_time = 0;
+                            walk_final = walk_counter;
+                        }
+                        else if (((sum_walk_time >= walk_ses) && ((sum_run_time < run_ses)))){
+                            walk_time_counter_txt.setText("100" + "%");
+                            walk_counter_txt.setText(String.valueOf(walk_final+1));
+                            run_time_counter_txt.setText(String.format("%.02f", ((sum_run_time / run_ses) * 100)) + "%");
+                            run_counter_txt.setText(String.valueOf(run_counter));
+                            sum_jump_time = 0;
+                            jump_counter = 0;
+                            run_final = run_counter;
 
-                    walk_time_counter_txt.setText(String.valueOf(sum_walk_time));
-                    run_time_counter_txt.setText(String.valueOf(sum_run_time));
-                    jump_time_counter_txt.setText(String.valueOf(sum_jump_time));
+                        }
+                        else if (((sum_run_time >= run_ses)) && ((jump_counter < jump_ses))){
+                            run_time_counter_txt.setText("100" + "%");
+                            run_counter_txt.setText(String.valueOf(run_final+1));
+                            jump_time_counter_txt.setText(String.format("%.02f", ((jump_counter / jump_ses) * 100)) + "%");
+                            jump_counter_txt.setText(String.valueOf(jump_counter));
+                            jump_final = jump_counter;
+                        }
+                        else if(((jump_counter >= jump_ses))){
+                            jump_time_counter_txt.setText("100" + "%");
+                            jump_counter_txt.setText(String.valueOf(jump_final+1));
+                        }
 
-                    walk_counter_txt.setText(String.valueOf(walk_counter));
-                    run_counter_txt.setText(String.valueOf(run_counter));
-                    jump_counter_txt.setText(String.valueOf(jump_counter));
 
-                    training_time = sum_run_time + sum_walk_time;
-                    // Set the percentage of language used
-                    int walk_part = (int) (100*(sum_walk_time/training_time));
-                    int run_part = (int) (100*(sum_run_time/training_time));
+                        training_time = sum_run_time + sum_walk_time;
+                        // Set the percentage of language used
+//                    int walk_part = (int) (100*(sum_walk_time/training_time));
+//                    int run_part = (int) (100*(sum_run_time/training_time));
 //                    dis_walk.setText(Integer.toString(walk_part));
 //                    dis_run.setText(Integer.toString(run_part));
-                    // Set the data and color to the pie chart
-                    showPieChart(walk_part, run_part);
+                        // Set the data and color to the pie chart
+//                    showPieChart(walk_part, run_part);
 
-                    walk_dis = (float) (walk_counter * (0.74));
-                    run_dis = (float) (walk_counter * (1.1));
-                    dis_walk.setText(String.valueOf(walk_dis));
-                    dis_run.setText(String.valueOf(run_dis));
-                    walk_counter = 10;
-                    step_walk.setText(String.valueOf(walk_counter));
-                    step_run.setText(String.valueOf(run_counter));
-                    step_jump.setText(String.valueOf(jump_counter));
+                        walk_dis = (float) ((walk_final+1) * (0.74));
+                        run_dis = (float) ((run_final+1) * (1.1));
+                        dis_walk.setText(String.valueOf(walk_dis));
+                        dis_run.setText(String.valueOf(run_dis));
+
+                        cir_walk.setText(String.valueOf(walk_final+1));
+                        cir_run.setText(String.valueOf(run_final+1));
+                        cir_jump.setText(String.valueOf(String.format("%.02f", (sum_jump_time))));
 
 
-                    data.addEntry(new Entry(Integer.valueOf(parts[3]),N),0);
+                        data.addEntry(new Entry(Integer.valueOf(parts[3]), N), 0);
 
-//                    lineDataSet0.notifyDataSetChanged(); // let the data know a dataSet changed
-//                    lineDataSet1.notifyDataSetChanged(); // let the data know a dataSet changed
-//                    lineDataSet2.notifyDataSetChanged(); // let the data know a dataSet changed
-                    lineDataSetN.notifyDataSetChanged(); // let the data know a dataSet changed
+//                        lineDataSet0.notifyDataSetChanged(); // let the data know a dataSet changed
+//                        lineDataSet1.notifyDataSetChanged(); // let the data know a dataSet changed
+//                        lineDataSet2.notifyDataSetChanged(); // let the data know a dataSet changed
+                        lineDataSetN.notifyDataSetChanged(); // let the data know a dataSet changed
 
-                    mpLineChart.notifyDataSetChanged(); // let the chart know it's data changed
-                    mpLineChart.invalidate(); // refresh
-
+                        mpLineChart.notifyDataSetChanged(); // let the chart know it's data changed
+                        mpLineChart.invalidate(); // refresh
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -879,7 +970,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
             receiveText.append(TextUtil.toCaretString(msg, newline.length() != 0));
         }
-    }
+
 
     private void showPieChart(int walk_part, int run_part)
     {
@@ -1036,13 +1127,13 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //
 //    }
 
-    private void OpenSaveCSV(String path,String walk_txt, String run_txt, String jump_txt){
+    private void OpenSaveCSV(String path, String ses, String walk_txt, String walk_time, String run_txt, String run_time, String jump_txt, String jump_time){
         try{
             File file = new File(path);
             file.mkdirs();
             String csv = path + "data.csv";
             CSVWriter csvWriter = new CSVWriter(new FileWriter(csv,true));
-            String row[]= new String[]{timeStamp,walk_txt,run_txt,jump_txt};
+            String row[]= new String[]{timeStamp, ses ,walk_txt,walk_time, run_txt, run_time, jump_txt, jump_time};
             csvWriter.writeNext(row);
             csvWriter.close();
         } catch (IOException e) {
